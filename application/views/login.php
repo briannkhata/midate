@@ -73,11 +73,11 @@
               <form action="#">
                 <div class="form-group">
                   <label for="">Phone Number</label>
-                  <input type="tel" class="my-form-control" placeholder="Enter Your Phone">
+                  <input type="tel" class="my-form-control" name="phone" placeholder="Enter Your Phone">
                 </div>
                 <div class="form-group">
                   <label for="">Password</label>
-                  <input type="text" class="my-form-control" placeholder="Enter Your Password">
+                  <input type="password" class="my-form-control" name="password" placeholder="Enter Your Password">
                 </div>
                 <p class="f-pass">
                   Forgot your password? <a href="#">recover password</a>
