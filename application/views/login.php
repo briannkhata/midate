@@ -1,63 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <link rel="stylesheet" href="assets/css/flaticon.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/odometer.css">
-  <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="assets/css/nice-select.css">
-  <link rel="stylesheet" href="assets/css/jquery.animatedheadline.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-  <!-- <link rel="stylesheet" href="assets/css/dark.css"> -->
-
-  <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-
-  <title>miDate</title>
-
-
-</head>
-
-<body>
-  <!-- ==========Preloader========== -->
-  <div class="preloader">
-    <div class="preloader-inner">
-      <div class="preloader-icon">
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ==========Preloader========== -->
-
-
-
-  <!-- ========== Login & Registation Section ========== -->
-  <section class="log-reg">
-    <div class="top-menu-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-5">
-            <!--<a href="index.html" class="backto-home"><i class="fas fa-chevron-left"></i> Back to peyamba</a>-->
-          </div>
-          <div class="col-lg-7 ">
-            <div class="logo">
-              <img src="assets/images/logo2.png" alt="logo">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<?php include 'header.php';?>
     <div class="container">
       <div class="row justify-content-end">
         <div class="image image-log">
@@ -92,7 +33,7 @@
                   <!--<p>Sign up with your email</p>
                   <a href="#" class="or-btn"><img src="assets/images/google.png" alt=""> Sign Up with Google</a>-->
                   <p class="or-signup">
-                    Don't have an account? <a href="register.html">
+                    Don't have an account? <a href="<?=base_url();?>Home/register">
                       Sign up here
                     </a>
                   </p>
@@ -107,22 +48,4 @@
 
   <!-- ========== Login & Registation Section ========== -->
 
-
-
-
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
-  <script src="assets/js/modernizr-3.6.0.min.js"></script>
-  <script src="assets/js/plugins.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/heandline.js"></script>
-  <script src="assets/js/isotope.pkgd.min.js"></script>
-  <script src="assets/js/magnific-popup.min.js"></script>
-  <script src="assets/js/owl.carousel.min.js"></script>
-  <script src="assets/js/wow.min.js"></script>
-  <script src="assets/js/countdown.min.js"></script>
-  <script src="assets/js/odometer.min.js"></script>
-  <script src="assets/js/viewport.jquery.js"></script>
-  <script src="assets/js/nice-select.js"></script>
-  <script src="assets/js/main.js"></script>
-</body>
-</html>
+  <?php include 'footer.php';?>

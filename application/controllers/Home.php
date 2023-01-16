@@ -12,9 +12,9 @@ class Home extends CI_Controller {
 			$this->load->view('register',$data);			
 		}
 
-		function complaints(){
-			$data['page_title']  = 'Complaints Handling Mechanism';
-			$this->load->view('complaints',$data);			
+		function about(){
+			$data['page_title']  = 'About';
+			$this->load->view('about',$data);			
 		}
 
 		function mission(){
