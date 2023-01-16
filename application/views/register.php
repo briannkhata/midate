@@ -1,10 +1,19 @@
 <?php include 'header.php';?>
+
+
 <div class="container">
     <div class="row justify-content-end">
         <div class="image">
         </div>
         <div class="col-lg-7">
             <div class="log-reg-inner">
+                <?php if ($this->session->flashdata('message')) { ?>
+
+                <div class="alert alert-primary" role="alert">
+                    <center><?=$this->session->flashdata('message'); ?> </center>
+                </div>
+                <?php }?>
+
                 <div class="section-header">
                     <h2 class="title">
                         Welcome to miDate
@@ -14,26 +23,30 @@
                         we’ll get a new account.
                     </p>
                 </div>
+
                 <div class="main-content">
-                    <form action="#">
+                    <form action="<?=base_url();?>User/register" method="post">
                         <h4 class="content-title">Acount Details</h4>
                         <div class="form-group">
                             <label for="">Phone Number</label>
-                            <input type="tel" class="my-form-control" placeholder="Enter Your Phone">
+                            <input type="tel" class="my-form-control" name="phone" id="phone"
+                                placeholder="Enter Your Phone" required>
                         </div>
-                       
+
                         <div class="form-group">
                             <label for="">Password*</label>
-                            <input type="text" class="my-form-control" placeholder="Enter Your Password">
+                            <input type="password" class="my-form-control" name="password" id="password"
+                                placeholder="Enter Your Password" required>
                         </div>
                         <div class="form-group">
                             <label for="">Confirm Password*</label>
-                            <input type="text" class="my-form-control" placeholder="Enter Your Password">
+                            <input type="password" class="my-form-control" id="cpassword" placeholder="Enter Your Password" required>
                         </div>
                         <h4 class="content-title mt-5">Profile Details</h4>
                         <div class="form-group">
                             <label for="">Name*</label>
-                            <input type="text" class="my-form-control" placeholder="Enter Your Full Name">
+                            <input type="text" class="my-form-control" name="name" id="name"
+                                placeholder="Enter Your Full Name" required>
                         </div>
                         <div class="form-group">
                             <label for="">Birthday*</label>
@@ -42,57 +55,70 @@
                         <div class="form-group">
                             <label for="">I am a*</label>
                             <div class="option">
-                                <div class="s-input mr-3">
-                                    <input type="radio" name="gender1" id="males1"><label for="males1">Man</label>
-                                </div>
-                                <div class="s-input">
-                                    <input type="radio" name="gender1" id="females1"><label for="females1">Woman</label>
+                                <div class="s-input nice-select-wraper">
+                                    <select class="select-bar" name="gender" id="gender" required>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="">Looking for a*</label>
                             <div class="option">
-                                <div class="s-input mr-3">
-                                    <input type="radio" name="gender2" id="males"><label for="males">Man</label>
-                                </div>
-                                <div class="s-input">
-                                    <input type="radio" name="gender2" id="females"><label for="females">Woman</label>
-                                </div>
-                            </div>
-                        </div>
-                       <!-- <div class="form-group">
-                            <label for="">Marial status*</label>
-                            <div class="option">
                                 <div class="s-input nice-select-wraper">
-                                    <select class="select-bar">
-                                        <option value="">Single</option>
-                                        <option value="">Marid</option>
-                                        <option value="">Marid</option>
-                                        <option value="">Marid</option>
+                                    <select class="select-bar" name="looking_for" id="looking_for" required>
+                                        <option value="Man">Man</option>
+                                        <option value="Woman">Woman</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>-->
-                        <div class="form-group">
-                            <label for="">Location*</label>
-                            <input type="text" class="my-form-control" placeholder="Enter Your City">
                         </div>
-                        <button class="custom-button" data-toggle="modal" data-target="#email-confirm">Create Your
+                        <div class="form-group">
+                            <label for="">Age From*</label>
+                            <div class="option">
+                                <div class="s-input nice-select-wraper">
+                                    <select class="select-bar" name="age_from" id="age_from" required>
+                                        <option value="18">18</option>
+                                        <option value="20">20</option>
+                                        <option value="24">24</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Age To*</label>
+                            <div class="option">
+                                <div class="s-input nice-select-wraper">
+                                    <select class="select-bar" name="age_to" id="age_to" required>
+                                        <option value="30">30</option>
+                                        <option value="35">35</option>
+                                        <option value="40">40</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Your Location*</label>
+                            <input type="text" class="my-form-control" name="location"
+                                placeholder="Enter Your Location" required>
+                        </div>
+                        <button type="submit" class="custom-button" id="regBTN">Create Your
                             Profile</button>
 
-                            <div class="or">
-                  <p>OR</p>
-                </div>
-                <div class="or-content">
-                  <!--<p>Sign up with your email</p>
+                        <div class="or">
+                            <p>OR</p>
+                        </div>
+                        <div class="or-content">
+                            <!--<p>Sign up with your email</p>
                   <a href="#" class="or-btn"><img src="assets/images/google.png" alt=""> Sign Up with Google</a>-->
-                  <p class="or-signup">
-                    Already have an account? <a href="<?=base_url();?>Home">
-                      Login in here
-                    </a>
-                  </p>
-                </div>
+                            <p class="or-signup">
+                                Already have an account? <a href="<?=base_url();?>Home">
+                                    Login in here
+                                </a>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -134,3 +160,15 @@
 
 
 <?php include 'footer.php';?>
+<script>
+    $('#cpassword').focusout(function(){
+        var pass = $('#password').val();
+        var pass2 = $('#cpassword').val();
+        if(pass != pass2){
+            alert('The passwords didn\'t match!');
+            $('#regBTN').prop('disabled',true);
+        }else{
+          $('#regBTN').prop('disabled',false);
+        }
+    });
+</script>
