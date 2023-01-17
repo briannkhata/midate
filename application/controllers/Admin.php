@@ -12,9 +12,9 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/dashboard',$data);			
 	}
 
-	function loan_applications(){
-		$data['page_title']  = 'Loan Applications';
-		$this->load->view('admin/loan_applications',$data);			
+	function users(){
+		$data['page_title']  = 'Users';
+		$this->load->view('admin/users',$data);
 	}
 
 	function messages(){
@@ -27,9 +27,9 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/settings',$data);			
 	}
 
-	function slides(){
-		$data['page_title']  = 'Slides';
-		$this->load->view('admin/slides',$data);			
+	function payments(){
+		$data['page_title']  = 'Payments';
+		$this->load->view('admin/payments',$data);
 	}
 
 	function services(){

@@ -53,26 +53,26 @@ class User extends CI_Controller {
 		redirect("admin/clients");
 	}
 
-	function deleteSlide($param=""){
+	function likeUser($param=""){
 		$this->db->where("id",$param);
 		$this->db->delete('slides');
 		redirect("admin/slides");
 	}
 
-	function deleteWhy($param=""){
+	function likePicture($param=""){
 		$this->db->where("id",$param);
 		$this->db->delete('products');
 		redirect("admin/products");
 	}
 
 
-	function deleteMessage($param=""){
+	function ChangeProfile($param=""){
 		$this->db->where("id",$param);
 		$this->db->delete('messages');
 		redirect("admin/messages");
 	}
 	
-	function addTestimonial(){
+	function AddPhoto(){
 		$data['page_title']  = 'Add Testimonial';
 		$this->load->view('admin/addTestimonial',$data);			
 	}
