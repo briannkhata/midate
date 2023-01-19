@@ -63,7 +63,7 @@
                     <a href="<?=base_url();?>User/membership">Membership</a>
                 </li>
                 <li>
-                    <a href="<?=base_url();?>User/my_profile/"<?=$this->session-userdata('user_id');?>>Profile</a>
+                    <a href="<?=base_url();?>User/my_profile/"<?=$this->session->userdata('user_id');?>>Profile</a>
                 </li>
                 <li class="separator">
                     <span>|</span>
@@ -81,11 +81,16 @@
                         </li>
                         <hr>
                         <li>
-                            <a href="#">Add Photos</a>
+                            <a href="<?=base_url();?>User/upload_photos">Upload Photos</a>
+                        </li>
+
+                        <hr>
+                        <li>
+                            <a href="<?=base_url();?>User/update_profile">Update Profile</a>
                         </li>
                         <hr>
                         <li>
-                            <a href="<?=base_url();?>User/close_account/<?=$this->session->userdata('user_id');?>">Close Account</a>
+                            <a href="<?=base_url();?>User/close_account">Close Account</a>
                         </li>
                         <hr>
                         <li>

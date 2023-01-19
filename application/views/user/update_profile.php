@@ -8,7 +8,7 @@
 <section class="user-setting-section">
     <div class="container">
         <div class="row">
-            <div class="col-xl-8 col-md-7 ">
+            <div class="col-xl-12 col-md-12">
                 <div class="page-title">
                     Profile Info
                 </div>
@@ -231,7 +231,6 @@
                 </div>
                 <div class="buttons  mt-30">
                     <button type="submit" class="custom-button">Save Changes</button>
-                    <button class="custom-button2">Discard All</button>
                 </div>
             </div>
         </div>

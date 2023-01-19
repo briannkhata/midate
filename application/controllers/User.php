@@ -42,6 +42,16 @@ class User extends CI_Controller {
         $data['user_id']  = $param;
         $this->load->view('user/my_profile',$data);
     }
+    function update_profile($param=''){
+        $data['page_title']  = 'Update Profile';
+        $data['user_id']  = $param;
+        $this->load->view('user/update_profile',$data);
+    }
+
+    function upload_photos(){
+        $data['page_title']  = 'Upload Photos';
+        $this->load->view('user/upload_photos',$data);
+    }
 
 	function membership($param=''){
 		$data['page_title']  = 'Membership';
