@@ -4,7 +4,7 @@
 
 
 <!-- ========= Profile Section Start -->
-
+<?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
 <section class="user-setting-section">
     <div class="container">
         <div class="row">
@@ -18,7 +18,7 @@
                             <div class="top-bg"></div>
                             <div class="p-inner-content">
                                 <div class="profile-img">
-                                    <img src="assets/images/profile/profile-user.png" alt="">
+                                    <img src="<?=base_url();?>assets/images/profile/profile-user.png" alt="">
                                     <div class="active-online"></div>
                                 </div>
                             </div>
@@ -55,175 +55,91 @@
                 </div>
                 <div class="input-info-box mt-30">
                     <div class="header">
-                        About your Profile
+                        Update Profile
                     </div>
                     <div class="content">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="my-input-box">
-                                    <label for="">Profile Name</label>
-                                    <input type="text" placeholder="Profile Name">
+                                    <label for="">Name</label>
+                                    <input type="text" name="name" value="<?=$row['name'];?>">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="my-input-box">
-                                    <label for="">Public Email</label>
-                                    <input type="text" placeholder="Public Email">
+                                    <label for="">Gender</label>
+                                    <select name="age_from" id="">
+                                        <option <?php if($row['gender'] == 'Males') echo 'selected';?> value="Male">Male</option>
+                                        <option <?php if($row['gender'] == 'Females') echo 'selected';?> value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="my-input-box">
+                                    <label for="">Date of Birth</label>
+                                    <input type="date" name="dob" value="<?=$row['dob'];?>">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="my-input-box">
+                                    <label for="">Phone</label>
+                                    <input type="tel" name="phone" value="<?=$row['phone'];?>">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="my-input-box">
+                                    <label for="">Email</label>
+                                    <input type="email" name="email" value="<?=$row['email'];?>">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="my-input-box">
-                                    <textarea name="" placeholder="Write a little description about you..."></textarea>
+                                    <label for="">Location</label>
+                                    <input type="text" name="location" value="<?=$row['location'];?>">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+
+
+
+
+
+                            <div class="col-md-12">
                                 <div class="my-input-box">
-                                    <label for="">Country</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Select Country</option>
-                                        <option value="">United State</option>
+                                    <label for="">Looking for</label>
+                                    <select name="age_from" id="">
+                                        <option <?php if($row['looking_for'] == 'Males') echo 'selected';?> value="Males">Male</option>
+                                        <option <?php if($row['looking_for'] == 'Females') echo 'selected';?> value="Females">Females</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">City</label>
-                                    <select name="" id="">
-                                        <option value="" disabled selected>Select City</option>
-                                        <option value="">New Work</option>
+                                    <label for="">Age From</label>
+                                    <select name="age_from" id="">
+                                        <option <?php if($row['age_from'] == '18') echo 'selected';?> value="18">18</option>
+                                        <option <?php if($row['age_from'] == '24') echo 'selected';?> value="24">24</option>
+                                        <option <?php if($row['age_from'] == '30') echo 'selected';?> value="30">30</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="my-input-box">
-                                    <label for="">Birthday</label>
-                                    <input type="date" >
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Occupation</label>
-                                    <input type="text" placeholder="Occupation">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Status</label>
-                                    <select name="" id="">
-                                        <option value="">In a Relationship</option>
-                                        <option value="">Single</option>
-                                        <option value="">Marid</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Birthplace</label>
-                                    <input type="text" placeholder="Birthplace">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-info-box mt-30">
-                    <div class="header">
-                        Interests
-                    </div>
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Favourite TV Shows</label>
-                                    <textarea name="" placeholder="Favourite TV Shows"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Favourite Music Bands / Artists</label>
-                                    <textarea name="" placeholder="Favourite Music Bands / Artists"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Favourite Movies</label>
-                                    <textarea name="" placeholder="Favourite Movies"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Favourite Games </label>
-                                    <textarea name="" placeholder="Favourite Games "></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Favourite Games </label>
-                                    <textarea name="" placeholder="Favourite Games"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-info-box mt-30">
-                    <div class="header">
-                        Jobs & Education
-                    </div>
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Title or Place</label>
-                                    <input type="text" placeholder="Title or Place">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Year Started</label>
-                                    <select name="" id="">
-                                        <option value="">2014</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Year End</label>
-                                    <select name="" id="">
-                                        <option value="">2017</option>
+                                    <label for="">Age To</label>
+                                    <select name="age_to" id="age_to">
+                                        <option <?php if($row['age_to'] == '24') echo 'selected';?> value="24">24</option>
+                                        <option <?php if($row['age_to'] == '35') echo 'selected';?> value="35">35</option>
+                                        <option <?php if($row['age_to'] == '40') echo 'selected';?> value="40">40</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="my-input-box">
-                                    <label for="">Description</label>
-                                    <textarea name="" id="" placeholder="Description"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Title or Place</label>
-                                    <input type="text" placeholder="Title or Place">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Year Started</label>
-                                    <select name="" id="">
-                                        <option value="">2014</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="my-input-box">
-                                    <label for="">Year End</label>
-                                    <select name="" id="">
-                                        <option value="">2017</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="my-input-box">
-                                    <label for="">Description</label>
-                                    <textarea name="" id="" placeholder="Description"></textarea>
+                                    <label for="">About</label>
+                                    <textarea name="about" value="<?=$row['about'];?>"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +152,7 @@
         </div>
     </div>
 </section>
-
+<?php }?>
 <!-- ========= Profile Section Start -->
 
 
