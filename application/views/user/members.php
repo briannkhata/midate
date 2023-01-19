@@ -18,7 +18,7 @@
                             </span>
                             <div class="filter-right">
                                 <select class="nice-select select-bar">
-                                    <option value="">Lcation</option>
+                                    <option value="">Location</option>
                                     <option value="">Age</option>
                                 </select>
                             </div>
@@ -28,9 +28,10 @@
             </div>
             <div class="row">
                 <?php foreach ($this->M_user->get_users2() as $row){?>
+                <a href="<?=base_url();?>User/profile/<?=$row['user_id'];?>" class="name">
                 <div class="col-lg-6">
                     <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend1.png" alt="<?=$row['name'];?>">
+                        <img src="<?=base_url();?>assets/images/profile/friend1.png" alt="<?=$row['name'];?>" style="width: 300px;">
                         <div class="content">
                             <a href="<?=base_url();?>User/profile/<?=$row['user_id'];?>" class="name">
                                 <?=$row['name'];?> | <?=$row['gender'];?>
@@ -38,13 +39,20 @@
                             <p class="date">
                                 <?=$row['location'];?>
                             </p>
+                            <span><?=date('Y-m-d') - date('Y-m-d',strtotime($row['dob']));?> Years Old</span>
                             <hr>
+                            <span>
+                                Looking for <b><?=$row['looking_for'];?></b>
+                            </span>
+
+                            <!--<hr>
                             <a href="<?=base_url();?>User/profile/<?=$row['user_id'];?>" class="connnect-btn">
                                 <i class="fa fa-thumbs-up"></i>
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                 </div>
+                </a>
     <?php }?>
 
             </div>

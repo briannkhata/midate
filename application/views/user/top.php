@@ -57,13 +57,13 @@
                     <a href="<?=base_url();?>User/members">Members</a>
                 </li>
                 <li>
-                    <a href="<?=base_url();?>User/friedn_requests">Chat Requests</a>
+                    <a href="<?=base_url();?>User/messages">Chat Requests</a>
                 </li>
                 <li>
                     <a href="<?=base_url();?>User/membership">Membership</a>
                 </li>
                 <li>
-                    <a href="<?=base_url();?>User/profile">Profile</a>
+                    <a href="<?=base_url();?>User/my_profile/"<?=$this->session-userdata('user_id');?>>Profile</a>
                 </li>
                 <li class="separator">
                     <span>|</span>
@@ -77,11 +77,15 @@
                     <ul class="submenu">
 
                         <li>
-                            <a href="#">Change Password</a>
+                            <a href="<?=base_url();?>User/change_password/<?=$this->session->userdata('user_id');?>">Change Password</a>
                         </li>
                         <hr>
                         <li>
                             <a href="#">Add Photos</a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a href="<?=base_url();?>User/close_account/<?=$this->session->userdata('user_id');?>">Close Account</a>
                         </li>
                         <hr>
                         <li>

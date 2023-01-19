@@ -37,11 +37,32 @@ class User extends CI_Controller {
 		$this->load->view('user/profile',$data);			
 	}
 
+    function my_profile($param=''){
+        $data['page_title']  = 'My Account';
+        $data['user_id']  = $param;
+        $this->load->view('user/my_profile',$data);
+    }
+
 	function membership($param=''){
 		$data['page_title']  = 'Membership';
 		$data['user_id']  = $param;
 		$this->load->view('user/membership',$data);			
 	}
+    function change_password($param=''){
+        $data['page_title']  = 'Change Password';
+        $data['user_id']  = $param;
+        $this->load->view('user/change_password',$data);
+    }
+    function close_account($param=''){
+        $data['page_title']  = 'Close Account';
+        $data['user_id']  = $param;
+        $this->load->view('user/close Account',$data);
+    }
+    function messages($param=''){
+        $data['page_title']  = 'Messages';
+        $data['user_id']  = $param;
+        $this->load->view('user/messages',$data);
+    }
 	
 	function profile_picture($param=""){
 		$data['title'] = $this->input->post('title');
