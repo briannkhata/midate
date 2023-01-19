@@ -18,10 +18,8 @@
                             </span>
                             <div class="filter-right">
                                 <select class="nice-select select-bar">
-                                    <option value="">Latest Active</option>
-                                    <option value="">NEW</option>
-                                    <option value="">OLD</option>
-                                    <option value="">POPULAR</option>
+                                    <option value="">Lcation</option>
+                                    <option value="">Age</option>
                                 </select>
                             </div>
                         </div>
@@ -29,197 +27,26 @@
                 </div>
             </div>
             <div class="row">
-                
+                <?php foreach ($this->M_user->get_users2() as $row){?>
                 <div class="col-lg-6">
                     <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend1.png" alt="">
+                        <img src="<?=base_url();?>assets/images/profile/friend1.png" alt="<?=$row['name'];?>">
                         <div class="content">
-                            <a href="<?=base_url();?>User/profile/1" class="name">
-                                Erma Porter
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
+                            <a href="<?=base_url();?>User/profile/<?=$row['user_id'];?>" class="name">
+                                <?=$row['name'];?> | <?=$row['gender'];?>
                             </a>
                             <p class="date">
-                                a month ago
+                                <?=$row['location'];?>
                             </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
+                            <hr>
+                            <a href="<?=base_url();?>User/profile/<?=$row['user_id'];?>" class="connnect-btn">
+                                <i class="fa fa-thumbs-up"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend2.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Brad Barber 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend3.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Vicki Alvarez 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend4.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Amber Perry
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend5.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Kelly Fox 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend6.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Opal Farmer 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend7.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                May Hart 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend8.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Ana Byrd
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend9.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Arthur Bass
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-friend">
-                        <img src="<?=base_url();?>assets/images/profile/friend10.png" alt="">
-                        <div class="content">
-                            <a href="single-profile.html" class="name">
-                                Stewart Bailey 
-                                <span class="isvarify">
-                                    <i class="fas fa-check-circle"></i>
-                                </span>
-                            </a>
-                            <p class="date">
-                                a month ago
-                            </p>
-                            <a href="single-profile.html" class="connnect-btn">
-                                Connected
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <?php }?>
+
             </div>
             <div class="row">
                 <div class="col-lg-12">

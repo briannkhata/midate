@@ -43,29 +43,24 @@ class User extends CI_Controller {
 		$this->load->view('user/membership',$data);			
 	}
 	
-	function saveClient(){
-		$data['name'] = $this->input->post('name');
-		$data['business'] = $this->input->post('business');
-		//$data['photo'] = $_FILES['photo']['name'];
-		$data['desc'] = $this->input->post('desc');
-		//move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
-		$this->db->insert('clients',$data);
-		redirect("admin/clients");
+	function profile_picture($param=""){
+		$data['title'] = $this->input->post('title');
+		$data['priority'] = $this->input->post('priority');
+		$data['photo'] = $_FILES['photo']['name'];
+		$data['user_id'] = $this->input->post('user_id');
+		move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
+		$this->db->insert('tblphotos',$data);
+		redirect("user/profile/".$param);
 	}
 
 	function likeUser($param=""){
-		$this->db->where("id",$param);
-		$this->db->delete('slides');
-		redirect("admin/slides");
+        $data['liker'] = $this->input->post('liker');
+        $data['liked'] = $this->input->post('liked');
+        $data['operation'] = $this->input->post('operation');
+        $data['time'] = date('Y-m-d h:m:s');
+        $this->db->insert('tbllikes',$data);
+        return;
 	}
-
-	function likePicture($param=""){
-		$this->db->where("id",$param);
-		$this->db->delete('products');
-		redirect("admin/products");
-	}
-
-
 	function ChangeProfile($param=""){
 		$this->db->where("id",$param);
 		$this->db->delete('messages');
@@ -75,14 +70,6 @@ class User extends CI_Controller {
 	function AddPhoto(){
 		$data['page_title']  = 'Add Testimonial';
 		$this->load->view('admin/addTestimonial',$data);			
-	}
-
-	function saveTestimonial(){
-		$data['name'] = $this->input->post('name');
-		$data['testimonial'] = $this->input->post('testimonial');
-		$data['occupation'] = $this->input->post('occupation');
-		$this->db->insert('testimonials',$data);
-		redirect("admin/testimonials");
 	}
 
 

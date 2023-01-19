@@ -8,11 +8,25 @@ class M_user extends CI_Model {
 			return $query->result_array();
 		}
 
+    function get_users2(){
+        $this->db->where('user_id !=',$this->session->userdata('user_id'));
+        $this->db->order_by('user_id','ASC');
+        $query = $this->db->get('tblusers');
+        return $query->result_array();
+    }
+
+
 		function get_user_by_id($user_id){
 		    $this->db->where('user_id',$user_id);
-			$query = $this->db->get('users');
+			$query = $this->db->get('tblusers');
 			return $query->result_array();
 		}
+
+    function get_user_likes($user_id){
+        $this->db->where('liked',$user_id);
+        $query = $this->db->get('tbllikes');
+        return $query->result_array();
+    }
 
 		function get_name($user_id){
    		    $this->db->where('user_id',$user_id);
@@ -24,7 +38,6 @@ class M_user extends CI_Model {
 			}else {
 				return '';
 			}
-			
 		}
 
 		function getLogin($username,$password){

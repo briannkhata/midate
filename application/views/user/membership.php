@@ -95,10 +95,10 @@
                                        1 Day
                                    </p>
                                    <h4 class="number">
-                                       <sup>$</sup>4.99
+                                       <sup>MWK</sup>2,000
                                    </h4>
                                    <p class="stamet">
-                                       Per Week
+                                       Per Day
                                    </p>
                                    <a href="#" class="custom-button">Buy Now!</a>
                                    <img class="shape" src="<?=base_url();?>assets//images/membership/plan-bg.png" alt="">
@@ -110,10 +110,10 @@
                                        1 Week
                                    </p>
                                    <h4 class="number">
-                                       <sup>$</sup>3.99
+                                       <sup>MWK</sup>6,000
                                    </h4>
                                    <p class="stamet">
-                                       Per Month
+                                       Per Week
                                    </p>
                                    <a href="#" class="custom-button">Buy Now!</a>
                                    <img class="shape" src="<?=base_url();?>assets//images/membership/plan-bg.png" alt="">
@@ -125,7 +125,7 @@
                                        1 Month
                                    </p>
                                    <h4 class="number">
-                                       <sup>$</sup>2.99
+                                       <sup>MWK</sup>15,000
                                    </h4>
                                    <p class="stamet">
                                        Per Month
@@ -140,10 +140,10 @@
                                        1 Year
                                    </p>
                                    <h4 class="number">
-                                       <sup>$</sup>1.99
+                                       <sup>MWK</sup>25,000
                                    </h4>
                                    <p class="stamet">
-                                       Per Month
+                                       Per Year
                                    </p>
                                    <a href="#" class="custom-button">Buy Now!</a>
                                    <img class="shape" src="<?=base_url();?>assets//images/membership/plan-bg.png" alt="">

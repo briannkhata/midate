@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/css/main.css">
     <link rel="stylesheet" href="<?=base_url();?>assets/css/responsive.css">
     <!-- <link rel="stylesheet" href="assets/css/dark.css"> -->
-
     <link rel="shortcut icon" href="<?=base_url();?>assets/images/favicon.png" type="image/x-icon">
-
     <title>miDate :: Dashboard</title>
 
 
@@ -59,7 +57,7 @@
                     <a href="<?=base_url();?>User/members">Members</a>
                 </li>
                 <li>
-                    <a href="<?=base_url();?>User/friedn_requests">Friend Requests</a>
+                    <a href="<?=base_url();?>User/friedn_requests">Chat Requests</a>
                 </li>
                 <li>
                     <a href="<?=base_url();?>User/membership">Membership</a>
@@ -77,7 +75,15 @@
                         <?=$this->session->userdata('name');?>
                     </a>
                     <ul class="submenu">
-                       
+
+                        <li>
+                            <a href="#">Change Password</a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a href="#">Add Photos</a>
+                        </li>
+                        <hr>
                         <li>
                             <a href="<?=base_url();?>Login/logout">Logout</a>
                         </li>
