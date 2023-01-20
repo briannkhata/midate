@@ -8,10 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-12 col-md-12 ">
-                <div class="page-title">
-                    Messages
 
-                </div>
                 <div class="frind-box">
                     <div class="single-friend">
                         <div class="left">
