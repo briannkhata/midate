@@ -8,51 +8,9 @@
 <section class="user-setting-section">
     <div class="container">
         <div class="row">
+            <form action="<?=base_url();?>User/update_profilee" method="post">
             <div class="col-xl-12 col-md-12">
-                <div class="page-title">
-                    Profile Info
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="profile-about-box">
-                            <div class="top-bg"></div>
-                            <div class="p-inner-content">
-                                <div class="profile-img">
-                                    <img src="<?=base_url();?>assets/images/profile/profile-user.png" alt="">
-                                    <div class="active-online"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="up-photo-card mb-30">
-                            <div class="icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="content">
-                                <h4>
-                                    Change Avatar
-                                </h4>
-                                <span>
-                                        120x120p size minimum
-                                    </span>
-                            </div>
-                        </div>
-                        <div class="up-photo-card">
-                            <div class="icon">
-                                <i class="fas fa-image"></i>
-                            </div>
-                            <div class="content">
-                                <h4>
-                                    Change Cover
-                                </h4>
-                                <span>
-                                        1200x300p size minimum
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="input-info-box mt-30">
                     <div class="header">
                         Update Profile
@@ -68,9 +26,9 @@
                             <div class="col-md-4">
                                 <div class="my-input-box">
                                     <label for="">Gender</label>
-                                    <select name="age_from" id="">
-                                        <option <?php if($row['gender'] == 'Males') echo 'selected';?> value="Male">Male</option>
-                                        <option <?php if($row['gender'] == 'Females') echo 'selected';?> value="Female">Female</option>
+                                    <select name="gender" id="">
+                                        <option <?php if($row['gender'] == 'Male') echo 'selected';?> value="Male">Male</option>
+                                        <option <?php if($row['gender'] == 'Female') echo 'selected';?> value="Female">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -101,11 +59,6 @@
                                     <input type="text" name="location" value="<?=$row['location'];?>">
                                 </div>
                             </div>
-
-
-
-
-
 
                             <div class="col-md-12">
                                 <div class="my-input-box">
@@ -139,7 +92,7 @@
                             <div class="col-md-12">
                                 <div class="my-input-box">
                                     <label for="">About</label>
-                                    <textarea name="about" value="<?=$row['about'];?>"></textarea>
+                                    <textarea name="about"><?=$row['about'];?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -149,6 +102,8 @@
                     <button type="submit" class="custom-button">Save Changes</button>
                 </div>
             </div>
+            </form>
+
         </div>
     </div>
 </section>

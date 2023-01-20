@@ -42,9 +42,8 @@ class User extends CI_Controller {
         $data['user_id']  = $param;
         $this->load->view('user/my_profile',$data);
     }
-    function update_profile($param=''){
+    function update_profile(){
         $data['page_title']  = 'Update Profile';
-        $data['user_id']  = $param;
         $this->load->view('user/update_profile',$data);
     }
 
@@ -83,6 +82,48 @@ class User extends CI_Controller {
 		$this->db->insert('tblphotos',$data);
 		redirect("user/profile/".$param);
 	}
+    function add_photo(){
+        $data['user_id'] = $this->session->userdata('user_id');
+        $data['photo'] = random_string().'_'.$_FILES['photo']['name'];
+        move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
+        $this->db->insert('tblphotos',$data);
+        $this->session->set_flashdata('message','Photo Uploaded Successfully');
+        redirect("user/upload_photos");
+    }
+
+    function close_account2(){
+        $data['reason_for_closing'] = $this->input->post('reason_for_closing');
+        $data['deleted'] = 1;
+        $data['date_closed'] = date('Y-m-d h:m:s');
+        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->update('tblusers',$data);
+        $this->session->set_flashdata('message','Account Closed Successfully');
+        redirect("Login/logout");
+    }
+
+    function update_password(){
+        $data['password'] = MD5($this->input->post('password'));
+        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->update('tblusers',$data);
+        $this->session->set_flashdata('message','Password Changed Successfully');
+        redirect("user/profile");
+    }
+    function update_profilee(){
+        $data['name'] = $this->input->post('name');
+        $data['phone'] = $this->input->post('phone');
+        $data['email'] = $this->input->post('email');
+        $data['dob'] = $this->input->post('dob');
+        $data['location'] = $this->input->post('location');
+        $data['gender'] = $this->input->post('gender');
+        $data['age_to'] = $this->input->post('age_to');
+        $data['age_from'] = $this->input->post('age_from');
+        $data['looking_for'] = $this->input->post('looking_for');
+        $data['about'] = $this->input->post('about');
+        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->update('tblusers',$data);
+        $this->session->set_flashdata('message','Profile Updated Successfully');
+        redirect("user/update_profile");
+    }
 
 	function likeUser($param=""){
         $data['liker'] = $this->input->post('liker');

@@ -8,13 +8,18 @@
 <section class="user-setting-section">
     <div class="container">
         <div class="row">
-
+            <form action="<?=base_url();?>User/update_password" method="post">
+                <?php if ($this->session->flashdata('message')) { ?>
+                    <div class="alert alert-info" role="alert">
+                        <?=$this->session->flashdata('message'); ?>
+                    </div>
+                <?php }?>
             <div class="col-xl-12 col-md-12 ">
-                <div class="page-title">
-                    Change Password
-                </div>
 
                 <div class="input-info-box mt-30">
+                    <div class="header">
+                        Change Password
+                    </div>
                     <div class="content">
                         <div class="row">
 
@@ -30,9 +35,7 @@
                                     <input type="password" id="ConfirmPassword" placeholder="Enter Confirm  Password">
                                 </div>
                             </div>
-
                             <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
-
                         </div>
                     </div>
                 </div>
@@ -40,6 +43,7 @@
                     <button type="submit" class="custom-button" id="sabumiti">Save Changes</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </section>

@@ -3,7 +3,7 @@
     <!-- ==========Header-Section========== --> 
 
     <!-- ========= Profile Section Start -->
-<?php foreach ($this->M_user->get_user_by_id($user_id) as $row){?>
+<?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
     <section class="profile-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -31,7 +31,7 @@
                                     <div class="left">
                                         <div class="icon">
                                             <i class="far fa-thumbs-up"></i>
-                                        </div> <?=count($this->M_user->get_user_likes($user_id));?>
+                                        </div> <?=count($this->M_user->get_user_likes($this->session->userdata('user_id')));?>
                                     </div>
                                    <div class="right">
                                         <a href="#" class="custom-button">
@@ -200,83 +200,4 @@
     <!-- ========= Profile Section Start -->
 
     <!-- ==========Newslater-Section========== -->
-    <footer class="footer-section">
-       
-       </div>
-       <div class="container">
-           <div class="footer-links">
-               <div class="row">
-                   <div class="col-lg-12">
-                       <hr class="hr">
-                   </div>
-               </div>
-               <div class="row">
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper one">
-                           <h4 class="f-l-title">
-                               Our Information
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  About Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Contact Us
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Customer Reviews
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Success Stories
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Business License
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <div class="col-lg-3 col-sm-6">
-                       <div class="link-wrapper two">
-                           <h4 class="f-l-title">
-                               My Account
-                           </h4>
-                           <ul class="f-solial-links">
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Manage Account
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i>  Safety Tips
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Account Varification
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Safety & Security
-                                   </a>
-                               </li>
-                               <li>
-                                   <a href="#">
-                                       <i class="fas fa-angle-double-right"></i> Membership Level
-                                   </a>
-                               </li>
-                           </ul>
-                       </div>
-                   </div>
-                   <?php include 'bottom.php';?>
+<?php include 'bottom.php';?>
