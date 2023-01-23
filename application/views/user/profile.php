@@ -3,7 +3,7 @@
     <!-- ==========Header-Section========== --> 
 
     <!-- ========= Profile Section Start -->
-<?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
+<?php foreach ($this->M_user->get_user_by_id($user_id) as $row){?>
     <section class="profile-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -35,19 +35,12 @@
                                     </div>
                                    <div class="right">
                                         <a href="#" class="custom-button">
-                                            <i class="fab fa-cloudversify"></i> Premium Member
+                                            <?=$row['gender'];?>
                                         </a>
                                     </div>
                                 </div>
                                  <hr>
-                                <div class="p-b-meta-two">
-                                    <div class="left">
-                                        Gender
-                                    </div>
-                                    <div class="right">
-                                       <?=$row['gender'];?>
-                                    </div>
-                                </div>
+                               
                                 <div class="p-b-meta-two">
                                     <div class="left">
                                         Looking for
@@ -62,6 +55,12 @@
                                     </div>
                                     <div class="right">
                                         <?=$row['age_from'];?> To <?=$row['age_to'];?> Yrs
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="p-b-meta-two">
+                                    <div class="">
+                                        <?=$row['about'];?>
                                     </div>
                                 </div>
 
@@ -95,22 +94,17 @@
                                 <i class="fas fa-camera"></i> 3 Upload Photos
                             </h4>-->
                             <div class="p-u-p-list">
-                                <div class="my-col">
-                                    <div class="img">
-                                        <img src="<?=base_url();?>assets/images/profile/up1.jpg" alt="">
-                                        <div class="overlay">
-                                            <a href="<?=base_url();?>assets/images/profile/up1.jpg" class="img-popup"><i class="fas fa-plus"></i></a>
+                                <?php foreach($this->M_user->get_my_photos($row['user_id']) as $loko){?>
+                                    <div class="my-col">
+                                        <div class="img">
+                                            <img src="<?=base_url();?>uploads/users/<?=$loko['photo'];?>" alt="">
+                                            <div class="overlay">
+                                                <a href="<?=base_url();?>uploads/users/<?=$loko['photo'];?>" class="img-popup"><i class="fas fa-plus"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="my-col">
-                                    <div class="img">
-                                        <img src="<?=base_url();?>assets/images/profile/up2.jpg" alt="">
-                                        <div class="overlay">
-                                            <a href="<?=base_url();?>assets/images/profile/up2.jpg" class="img-popup"><i class="fas fa-plus"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php } ?>
+                               
                             </div>
                         </div>
                     </div>
@@ -143,17 +137,46 @@
                         </div>
 
 
+                        <div class="profile-single-post">
+                            <div class="p-s-p-header-area">
+                                <div class="img">
+                                    <img src="<?=base_url();?>assets/images/profile/profile-user-sm.png" alt="">
+                                    <div class="active-online"></div>
+                                </div>
+                                <h6 class="name">
+                                    Albert Don
+                                </h6>
+
+
+                                <span class="post-time">
+                                    . 19h
+                                </span>
+                            </div>
+                            <div class="p-s-p-content">
+                                <p id="resulto">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Nam vel porta felis.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+
 
 
                         <div class="write-post-area">
                             <div class="write-area">
-                                <textarea placeholder="Say hi to <?=$row['name'];?>"></textarea>
+                                <textarea placeholder="Say hi to <?=$row['name'];?>" name="message" id="message"></textarea>
+                                <input type="hidden" name="to" id="to" value="<?=$row['user_id'];?>">
+                                <input type="hidden" name="from" id="from" value="<?=$this->session->userdata('user_id');?>">
+
                             </div>
                             <div class="submit-area">
                                 <div class="left">
                                 </div>
                                 <div class="right">
-                                    <a href="#" class="custom-button">
+                                    <a href="#" class="custom-button" id="submito">
                                         Send
                                     </a>
                                 </div>
@@ -201,3 +224,39 @@
 
     <!-- ==========Newslater-Section========== -->
 <?php include 'bottom.php';?>
+<script>
+        $(document).ready(function() {
+            $("#submito").click(function() {
+ 
+                var message = $("#message").val();
+                var to = $("#to").val();
+                var from = $("#from").val();
+
+                if(message =='') {
+                    alert("Please fill all fields.");
+                    return false;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?=base_url();?>User/send_message",
+                    data: {
+                        message: message,
+                        to: to,
+                        from: from
+                    },
+                    cache: false,
+                    success: function(data) {
+                        //alert(data);
+                        $("#message").val()
+                        //$('resulto').inn(data);
+                    },
+                    error: function(xhr, status, error) {
+                        //console.error(xhr);
+                    }
+                });
+                 
+            });
+ 
+        });
+    </script>

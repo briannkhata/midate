@@ -13,13 +13,13 @@
                             </a>
                         </div>
                         <div class="right">
-                            <span class="span">
-                                Order By : 
-                            </span>
+                           
                             <div class="filter-right">
-                                <select class="nice-select select-bar">
-                                    <option value="">Location</option>
-                                    <option value="">Age</option>
+                                <select class="nice-select select-bar" id="location">
+                                    <option value="">Filter By Location</option>
+                                    <?php foreach($this->M_user->get_users2() as $rowo){?>
+                                    <option value="<?=$rowo['location'];?>"><?=$rowo['location'];?></option>
+                                    <?php }?>
                                 </select>
                             </div>
                         </div>

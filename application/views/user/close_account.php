@@ -3,7 +3,7 @@
 
 
 <!-- ========= Profile Section Start -->
-
+<form action="<?=base_url();?>User/close_account2" method="post">
 <section class="user-setting-section">
     <div class="container">
         <div class="row">
@@ -25,7 +25,7 @@
                                     and will lose access forever.
                                 </p>
                                 <div class="my-input-box">
-                                    <input type="password" placeholder="Enter Your Password">
+                                    <input type="text" placeholder="Reason for closing the Account">
                                 </div>
                             </div>
                         </div>
@@ -38,6 +38,7 @@
         </div>
     </div>
 </section>
+</form>
 
 <!-- ========= Profile Section Start -->
 

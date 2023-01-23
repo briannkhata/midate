@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?=base_url();?>assets/css/responsive.css">
     <!-- <link rel="stylesheet" href="assets/css/dark.css"> -->
     <link rel="shortcut icon" href="<?=base_url();?>assets/images/favicon.png" type="image/x-icon">
-    <title>miDate :: Dashboard</title>
+    <title>miDate :: <?=$page_title;?></title>
 
 
 </head>
@@ -63,7 +63,7 @@
                     <a href="<?=base_url();?>User/membership">Membership</a>
                 </li>
                 <li>
-                    <a href="<?=base_url();?>User/my_profile/"<?=$this->session->userdata('user_id');?>>Profile</a>
+                    <a href="<?=base_url();?>User/my_profile">Profile</a>
                 </li>
                 <li class="separator">
                     <span>|</span>

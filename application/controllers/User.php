@@ -8,7 +8,7 @@ class User extends CI_Controller {
 	}
 
 	function members(){
-		$data['page_title']  = 'Dashboard';
+		$data['page_title']  = 'Users';
 		$this->load->view('user/members',$data);			
 	}
 
@@ -37,11 +37,11 @@ class User extends CI_Controller {
 		$this->load->view('user/profile',$data);			
 	}
 
-    function my_profile($param=''){
+    function my_profile(){
         $data['page_title']  = 'My Account';
-        $data['user_id']  = $param;
         $this->load->view('user/my_profile',$data);
     }
+
     function update_profile(){
         $data['page_title']  = 'Update Profile';
         $this->load->view('user/update_profile',$data);
@@ -125,6 +125,19 @@ class User extends CI_Controller {
         redirect("user/update_profile");
     }
 
+
+	function send_message(){
+        $data['from'] = $this->session->userdata('user_id');
+        $data['to'] = $this->input->post('to');
+        $data['message'] = $this->input->post('message');
+        $data['sent'] = date('Y-m-d h:s:m');
+        $data['read'] = 0;
+        $this->db->insert('tblchats',$data);
+        return;
+    }
+
+
+	
 	function likeUser($param=""){
         $data['liker'] = $this->input->post('liker');
         $data['liked'] = $this->input->post('liked');

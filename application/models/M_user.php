@@ -15,6 +15,12 @@ class M_user extends CI_Model {
         return $query->result_array();
     }
 
+	function get_my_photos($user_id){
+        $this->db->where('user_id =',$user_id);
+        $query = $this->db->get('tblphotos');
+        return $query->result_array();
+    }
+
 
 		function get_user_by_id($user_id){
 		    $this->db->where('user_id',$user_id);
