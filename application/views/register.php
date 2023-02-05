@@ -1,174 +1,87 @@
-<?php include 'header.php';?>
 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?=$this->db->get('tblsettings')->row()->app;?></title>
 
-<div class="container">
-    <div class="row justify-content-end">
-        <div class="image">
-        </div>
-        <div class="col-lg-7">
-            <div class="log-reg-inner">
-                <?php if ($this->session->flashdata('message')) { ?>
+    <!-- Favicon -->
+    <link rel="icon" href="<?=base_url();?>dist/media/img/favicon.png" type="image/png">
 
-                <div class="alert alert-primary" role="alert">
-                    <center><?=$this->session->flashdata('message'); ?> </center>
-                </div>
-                <?php }?>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:600,700&amp;display=swap" rel="stylesheet">
 
-                <div class="section-header">
-                    <h2 class="title">
-                        Welcome to miDate
-                    </h2>
-                    <p>
-                        Let's create your profile! Just fill in the fields below, and
-                        we’ll get a new account.
-                    </p>
-                </div>
+    <!-- Material design icons -->
+    <link href="<?=base_url();?>dist/icons/materialicons/css/materialdesignicons.min.css" rel="stylesheet">
 
-                <div class="main-content">
-                    <form action="<?=base_url();?>User/register" method="post">
-                        <h4 class="content-title">Acount Details</h4>
-                        <div class="form-group">
-                            <label for="">Phone Number</label>
-                            <input type="tel" class="my-form-control" name="phone" id="phone"
-                                placeholder="Enter Your Phone" required>
-                        </div>
+    <!-- Bundle Styles -->
+    <link rel="stylesheet" href="<?=base_url();?>dist/vendor/bundle.css">
 
-                        <div class="form-group">
-                            <label for="">Password*</label>
-                            <input type="password" class="my-form-control" name="password" id="password"
-                                placeholder="Enter Your Password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Confirm Password*</label>
-                            <input type="password" class="my-form-control" id="cpassword" placeholder="Enter Your Password" required>
-                        </div>
-                        <h4 class="content-title mt-5">Profile Details</h4>
-                        <div class="form-group">
-                            <label for="">Name*</label>
-                            <input type="text" class="my-form-control" name="name" id="name"
-                                placeholder="Enter Your Full Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Birthday*</label>
-                            <input type="date" class="my-form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="">I am a*</label>
-                            <div class="option">
-                                <div class="s-input nice-select-wraper">
-                                    <select class="select-bar" name="gender" id="gender" required>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Looking for a*</label>
-                            <div class="option">
-                                <div class="s-input nice-select-wraper">
-                                    <select class="select-bar" name="looking_for" id="looking_for" required>
-                                        <option value="Man">Man</option>
-                                        <option value="Woman">Woman</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Age From*</label>
-                            <div class="option">
-                                <div class="s-input nice-select-wraper">
-                                    <select class="select-bar" name="age_from" id="age_from" required>
-                                        <option value="18">18</option>
-                                        <option value="20">20</option>
-                                        <option value="24">24</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Landing page styles -->
+    <link rel="stylesheet" href="<?=base_url();?>dist/css/landing-page.min.css">
+</head>
+<body class="auth" style="background: url(<?=base_url();?>dist/media/img/auth.jpg)">
+<div class="form-wrapper">
 
-                        <div class="form-group">
-                            <label for="">Age To*</label>
-                            <div class="option">
-                                <div class="s-input nice-select-wraper">
-                                    <select class="select-bar" name="age_to" id="age_to" required>
-                                        <option value="30">30</option>
-                                        <option value="35">35</option>
-                                        <option value="40">40</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Your Location*</label>
-                            <input type="text" class="my-form-control" name="location"
-                                placeholder="Enter Your Location" required>
-                        </div>
-                        <button type="submit" class="custom-button" id="regBTN">Create Your
-                            Profile</button>
-
-                        <div class="or">
-                            <p>OR</p>
-                        </div>
-                        <div class="or-content">
-                            <!--<p>Sign up with your email</p>
-                  <a href="#" class="or-btn"><img src="assets/images/google.png" alt=""> Sign Up with Google</a>-->
-                            <p class="or-signup">
-                                Already have an account? <a href="<?=base_url();?>Home">
-                                    Login in here
-                                </a>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <!-- logo -->
+    <div class="logo my-5">
+        <img src="<?=base_url();?>dist/media/img/logo-full-2x.png" alt="logo">
     </div>
-</div>
-</section>
+    <!-- ./ logo -->
 
-<!-- ========== Login & Registation Section ========== -->
-
-<!-- Modal -->
-<div class="modal fade" id="email-confirm" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="top-img">
-                    <img src="assets/images/c-image.png" alt="">
-                </div>
-                <div class="main-content">
-                    <h4 class="title">
-                        Check Your Inbox, Please!
-                    </h4>
-                    <p>
-                        A link to verify account has been sent to the email supplied. Please open the link and follow
-                        the prompts
-                        to verify
-                        email.
-                    </p>
-                    <p class="send-again">
-                        Didn't get e-mail? <a href="#">
-                            Send it again
-                        </a>
-                    </p>
-                </div>
-            </div>
+    <?php if ($this->session->flashdata('message')) { ?>
+        <div class="alert alert-success" role="alert">
+            <?=$this->session->flashdata('message'); ?>
         </div>
-    </div>
+    <?php }?>
+
+    <h5>Create account</h5>
+
+    <!-- form -->
+    <form action="<?=base_url();?>User/register" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" name="country" placeholder="Country" required autofocus>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" class="form-control" name="phone" placeholder="Phone ie start with country code" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+        <div class="my-5">
+            Already have an account? <a href="<?=base_url();?>">Sign in now!</a>
+        </div>
+    </form>
+    <!-- ./ form -->
+
 </div>
 
+<!-- Bundle -->
+<script src="<?=base_url();?>dist/vendor/bundle.js"></script>
 
-<?php include 'footer.php';?>
+<!-- Landing page scripts -->
+<script src="<?=base_url();?>dist/js/landing-page.min.js"></script>
+
+<!-- Theme customizer scripts -->
+<script>let LANDING_PAGE = true</script>
+<script src="<?=base_url();?>dist/js/theme-customizer.min.js"></script>
+</body>
+</html>
+
 <script>
-    $('#cpassword').focusout(function(){
-        var pass = $('#password').val();
-        var pass2 = $('#cpassword').val();
-        if(pass != pass2){
-            alert('The passwords didn\'t match!');
-            $('#regBTN').prop('disabled',true);
-        }else{
-          $('#regBTN').prop('disabled',false);
-        }
+    $(document).ready(function() {
+        // show the alert
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 2000);
     });
 </script>

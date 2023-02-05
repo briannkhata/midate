@@ -8,10 +8,18 @@ class M_user extends CI_Model {
 			return $query->result_array();
 		}
 
-    function get_users2(){
+    function get_nearby_members(){
         $this->db->where('user_id !=',$this->session->userdata('user_id'));
         $this->db->order_by('user_id','ASC');
         $query = $this->db->get('tblusers');
+        return $query->result_array();
+    }
+
+    function get_mychats(){
+        $this->db->where('to',$this->session->userdata('user_id'));
+        $this->db->group_by('from');
+        $this->db->order_by('sent','Desc');
+        $query = $this->db->get('tblchats');
         return $query->result_array();
     }
 
@@ -22,11 +30,11 @@ class M_user extends CI_Model {
     }
 
 
-		function get_user_by_id($user_id){
-		    $this->db->where('user_id',$user_id);
-			$query = $this->db->get('tblusers');
-			return $query->result_array();
-		}
+    function get_user_by_id($user_id){
+	    $this->db->where('user_id',$user_id);
+		$query = $this->db->get('tblusers');
+		return $query->result_array();
+	}
 
     function get_user_likes($user_id){
         $this->db->where('liked',$user_id);
@@ -34,9 +42,9 @@ class M_user extends CI_Model {
         return $query->result_array();
     }
 
-		function get_name($user_id){
+    function get_name($user_id){
    		    $this->db->where('user_id',$user_id);
-			$query = $this->db->get('users')->result_array();
+			$query = $this->db->get('tblusers')->result_array();
 			if(count($query) > 0){
 				foreach ($query as $row) {
 					return $row['name'];
@@ -44,7 +52,19 @@ class M_user extends CI_Model {
 			}else {
 				return '';
 			}
-		}
+        }
+
+    function get_photo($user_id){
+        $this->db->where('user_id',$user_id);
+        $query = $this->db->get('tblusers')->result_array();
+        if(count($query) > 0){
+            foreach ($query as $row) {
+                return $row['photo'];
+            }
+        }else {
+            return '';
+        }
+    }
 
 		function getLogin($username,$password){
 			$this->db->select('*');

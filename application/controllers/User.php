@@ -3,65 +3,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
 	function index(){
-		$data['page_title']  = 'Admin Login';
+		$data['page_title']  = 'Login';
 		$this->load->view('admin/index',$data);			
 	}
 
-	function members(){
+    function check_session(){
+        if ($this->session->userdata('user_login') != 1)//not logged in
+            redirect(base_url(), 'refresh');
+    }
+
+	function chat(){
+        $this->check_session();
 		$data['page_title']  = 'Users';
-		$this->load->view('user/members',$data);			
+		$this->load->view('user/chat',$data);
 	}
 
 	function register(){
 		$data['name'] = $this->input->post('name');
 		$data['password'] = MD5($this->input->post('password'));
 		$data['phone'] = $this->input->post('phone');
-		$data['email'] = $this->input->post('email');
-		$data['dob'] = $this->input->post('dob');
-		$data['location'] = $this->input->post('location');
-		$data['gender'] = $this->input->post('gender');
-		$data['age_to'] = $this->input->post('age_to');
-		$data['age_from'] = $this->input->post('age_from');
-		$data['looking_for'] = $this->input->post('looking_for');
+		$data['country'] = $this->input->post('country');
 		$data['register_date'] = date('Y-m-d h:m:s');
         $data['role'] = 1;
 		$data['activation_code'] = "";
 		$this->db->insert('tblusers',$data);
-        $this->session->set_flashdata('message','Your Account has been Created Successfully, Please go to Login');
+        $this->session->set_flashdata('message','Your Account has been Created Successfully, Please Login');
 		redirect("Home/register");
 	}
 
-	function profile($param=''){
-		$data['page_title']  = 'Profile';
-		$data['user_id']  = $param;
-		$this->load->view('user/profile',$data);			
-	}
-
-    function my_profile(){
-        $data['page_title']  = 'My Account';
-        $this->load->view('user/my_profile',$data);
+    function change_password(){
+        $data['password'] = MD5($this->input->post('password'));
+        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->insert('tblusers',$data);
+        return;
     }
 
-    function update_profile(){
-        $data['page_title']  = 'Update Profile';
-        $this->load->view('user/update_profile',$data);
-    }
-
-    function upload_photos(){
-        $data['page_title']  = 'Upload Photos';
-        $this->load->view('user/upload_photos',$data);
-    }
-
-	function membership($param=''){
-		$data['page_title']  = 'Membership';
-		$data['user_id']  = $param;
-		$this->load->view('user/membership',$data);			
-	}
-    function change_password($param=''){
-        $data['page_title']  = 'Change Password';
-        $data['user_id']  = $param;
-        $this->load->view('user/change_password',$data);
-    }
     function close_account($param=''){
         $data['page_title']  = 'Close Account';
         $data['user_id']  = $param;
@@ -108,10 +84,10 @@ class User extends CI_Controller {
         $this->session->set_flashdata('message','Password Changed Successfully');
         redirect("user/profile");
     }
-    function update_profilee(){
+    function update_my_profile(){
         $data['name'] = $this->input->post('name');
-        $data['phone'] = $this->input->post('phone');
-        $data['email'] = $this->input->post('email');
+        $data['church'] = $this->input->post('church');
+        $data['profession'] = $this->input->post('profession');
         $data['dob'] = $this->input->post('dob');
         $data['location'] = $this->input->post('location');
         $data['gender'] = $this->input->post('gender');
@@ -119,10 +95,17 @@ class User extends CI_Controller {
         $data['age_from'] = $this->input->post('age_from');
         $data['looking_for'] = $this->input->post('looking_for');
         $data['about'] = $this->input->post('about');
+        $data['country'] = $this->input->post('country');
+        $data['location'] = $this->input->post('location');
+        $data['district'] = $this->input->post('district');
+        $data['m_status'] = $this->input->post('m_status');
+        $data['dating_type'] = $this->input->post('dating_type');
+        $data['hobies'] = $this->input->post('hobies');
         $this->db->where('user_id',$this->session->userdata('user_id'));
         $this->db->update('tblusers',$data);
-        $this->session->set_flashdata('message','Profile Updated Successfully');
-        redirect("user/update_profile");
+        //$this->session->set_flashdata('message','Profile Updated Successfully');
+        //redirect("user/update_profile");
+        return;
     }
 
 
