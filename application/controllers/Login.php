@@ -7,8 +7,7 @@ class Login extends CI_Controller {
 			$phone	=	$this->input->post('phone');
   			//$password	=	md5($this->input->post('password'));
 			$password	=	$this->input->post('password');
-	
-			$login = $this->db->query("SELECT * FROM tblusers WHERE phone='$phone' AND password='$password'");
+            $login = $this->db->query("SELECT * FROM tblusers WHERE phone='$phone' AND password='$password' AND deleted = 0");
 			$row = $login->row();
 				if (isset($row))
 					{
@@ -26,7 +25,8 @@ class Login extends CI_Controller {
 			    }
 	}
 	function logout(){
-		$this->session->sess_destroy();
+        $this->M_user->get_setonline_status_to_off($this->session->userdata('user_id'));
+        $this->session->sess_destroy();
 		redirect(base_url());
 	}
 }

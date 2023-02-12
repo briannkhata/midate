@@ -93,7 +93,7 @@
                 <li class="brackets">
                     <a data-left-sidebar="activate-account" href="#" data-toggle="tooltip"
                        title="Activate Account" data-placement="right">
-                        <i data-feather="edit"></i>
+                        <!--<i data-feather="edit"></i>-->
                     </a>
                 </li>
 
@@ -217,24 +217,10 @@
                     <div class="users-list-body">
                         <div>
                             <h5><?=$this->M_user->get_name($rowo['from']);?></h5>
-                            <p>I sent you all the files. Good luck with 😃</p>
+                            <p><?=$rowo['message'];?></p>
                         </div>
                         <div class="users-list-action">
-                            <small class="text-muted">11:05 AM</small>
-                            <div class="action-toggle">
-                                <div class="dropdown">
-                                    <a data-toggle="dropdown" href="#">
-                                        <i class="mdi mdi-dots-horizontal"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">Open</a>
-                                        <a href="#" data-right-sidebar="user-profile" class="dropdown-item">Profile</a>
-                                        <a href="#" class="dropdown-item">Add to archive</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item text-danger example-delete-chat">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <small class="text-muted"><?=date('Y M d h:m:s',strtotime($rowo['sent']));?></small>
                         </div>
                     </div>
                 </li>
@@ -266,30 +252,16 @@
                 <?php foreach ($this->M_user->get_nearby_members() as $row){?>
                 <li class="list-group-item">
                     <div>
-                        <figure class="avatar mr-3">
-                            <img src="<?=base_url();?>dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
+                        <figure class="avatar mr-3" style="height: 4.7rem;width: 4.7rem;">
+                            <img src="<?=base_url();?>uploads/users/<?=$row['photo'];?>" class="rounded-circle" alt="image">
                         </figure>
                     </div>
                     <div class="users-list-body">
                         <div>
-                            <h5><?=$row['name'];?></h5>
-                            <p>Dental Hygienist</p>
-                        </div>
-                        <div class="users-list-action">
-                            <div class="action-toggle">
-                                <div class="dropdown">
-                                    <a data-toggle="dropdown" href="#">
-                                        <i class="mdi mdi-dots-horizontal"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">New chat</a>
-                                        <a href="#" data-right-sidebar="user-profile"
-                                           class="dropdown-item">Profile</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item text-danger">Block</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <h5><?=$row['name'];?> | <?=$row['gender'];?></h5>
+                            <small> Looking for <?=$row['looking_for'];?></small>
+                            <small><?=date('Y-m-d') - date('Y-m-d',strtotime($row['dob']));?> Years Old</small>
+                            <small><?=$row['district'];?>,<?=$row['location'];?>,</small>
                         </div>
                     </div>
                 </li>
@@ -480,6 +452,7 @@
     </div>
     <!-- ./ Archived left sidebar -->
 
+    <?php foreach($this->M_user->get_user_by_id(3) as $row0){?>
     <!-- chat -->
     <div class="chat"> <!-- no-message -->
         <div class="chat-preloader d-none">
@@ -490,7 +463,7 @@
         <div class="no-message-container">
             <div class="row mb-5">
                 <div class="col-md-4 offset-4">
-                    <img src="<?=base_url();?>dist/media/svg/chat_empty.svg" class="img-fluid" alt="image">
+                    <img src="<?=base_url();?>uploads/users/<?=$row0['photo'];?>" class="img-fluid" alt="image">
                 </div>
             </div>
             <p class="lead">Choose a chat or start a <a href="#" data-left-sidebar="friends">new chat</a>.</p>
@@ -498,499 +471,65 @@
         <div class="chat-header">
             <div class="chat-header-user">
                 <figure class="avatar avatar-state-success">
-                    <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
+                    <img src="<?=base_url();?>uploads/users/<?=$row0['photo'];?>" class="rounded-circle" alt="image">
                 </figure>
                 <div>
-                    <h5>Maribel Mallon</h5>
+                    <h5><a href="#" data-right-sidebar="user-profile" title="Click to view Profile"><?=$row0['name'];?></a></h5>
+
+                    <?php $status = $this->M_user->get_online_status(3);
+                    if($status == 1){?>
                     <small class="text-success">Online</small>
+                    <?php } else{ ?>
+                        <small class="text-warning">Onffline</small>
+                    <?php }?>
                 </div>
-            </div>
-            <div class="chat-header-action">
-                <ul class="list-inline" data-intro-js="7">
-                    <li class="list-inline-item d-inline d-lg-none">
-                        <a href="#" class="btn btn-danger btn-floating example-chat-close">
-                            <i class="mdi mdi-arrow-left"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item" data-toggle="tooltip" title="Voice call">
-                        <a href="#" class="btn btn-info btn-floating" data-right-sidebar="notifications">
-                            <i class="mdi mdi-bell-outline"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item" data-toggle="tooltip" title="Voice call">
-                        <a href="#" class="btn btn-success btn-floating voice-call-request">
-                            <i class="mdi mdi-phone"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item" data-toggle="tooltip" title="Video call">
-                        <a href="#" class="btn btn-warning btn-floating video-call-request">
-                            <i class="mdi mdi-video-outline"></i>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="btn btn-dark btn-floating" data-toggle="dropdown">
-                            <i class="mdi mdi-dots-horizontal"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" data-right-sidebar="user-profile" class="dropdown-item">Profile</a>
-                            <a href="#" class="dropdown-item example-close-selected-chat">Close chat</a>
-                            <a href="#" class="dropdown-item">Add to archive</a>
-                            <a href="#" class="dropdown-item example-delete-chat">Delete</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item text-danger example-block-user">Block</a>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
         <div class="chat-body">
             <div class="messages">
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">10:12 PM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">Hello, Blondy Neeson 😃</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
+                <?php foreach($this->M_user->get_user_chats($this->session->userdata('user_id'),$row0['user_id']) as $chat) { ?>
+
+                    <?php if($chat['from'] == $this->session->userdata('user_id')){
+                        ?>
+                        <div class="message-item out">
+                            <div class="message-avatar">
+                                <figure class="avatar avatar-sm">
+
+                                    <img src="<?php echo file_exists(base_url().'uploads/users/'.$this->M_user->get_photo($chat['from'])) ? base_url().'uploads/users/'.$this->M_user->get_photo($chat['from']) : base_url().'uploads/users/noimage.png';?>" class="rounded-circle" alt="image">
+                                </figure>
+                                <div>
+                                    <h5><?=$this->M_user->get_name($chat['from']);?></h5>
+                                    <div class="time"><?=date('d, M Y h:m:s',strtotime($chat['sent']));?></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-content">
-                        <div class="message-text">How do you feel today? I want to ask you something.</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
+                        <div class="message-item out">
+                            <div class="message-content">
+                                <div class="message-text"><?=$chat['message'];?></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Matteo Reedy</h5>
-                            <div class="time">01:20 PM <i class="mdi mdi-check-all text-info ml-1"></i></div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">
-                            Hello 😃
-                            <br>
-                            <br>
-                            All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as
-                            necessary, making this the first true generator on the Internet. It uses a dictionary of
-                            over 200 Latin words, combined with a handful of model sentence structures, to generate
-                            Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free
-                            from repetition, injected humour, or non-characteristic words etc.
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
+                    <?php } else{ ?>
+                        <div class="message-item in">
+                            <div class="message-avatar">
+                                <figure class="avatar avatar-sm">
+                                    <img src="<?=base_url();?>uploads/users/<?=$this->M_user->get_photo($row0['user_id']);?>" class="rounded-circle" alt="image">
+                                </figure>
+                                <div>
+                                    <h5><?=$this->M_user->get_name($row0['user_id']);?></h5>
+                                    <div class="time"><?=date('d, M Y h:m:s',strtotime($chat['sent']));?></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">10:43 AM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <audio controls>
-                            <source src="https://www.w3schools.com/tags/horse.ogg" type="audio/ogg">
-                            <source src="https://www.w3schools.com/tags/horse.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
+                        <div class="message-item in">
+                            <div class="message-content">
+                                <div class="message-text"><?=$chat['message'];?></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Matteo Reedy</h5>
-                            <div class="time">
-                                10:43 AM
-                                <i class="mdi mdi-check-all text-info ml-1"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <audio controls>
-                            <source src="https://www.w3schools.com/tags/horse.ogg" type="audio/ogg">
-                            <source src="https://www.w3schools.com/tags/horse.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-content">
-                        <div class="message-text">You are good ❤❤</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">11:59 PM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">I want to send you a file.</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-content message-file">
-                        <div class="message-text d-flex">
-                            <div class="file-icon">
-                                <i class="mdi mdi-file-pdf-box-outline"></i>
-                            </div>
-                            <div>
-                                <div>test-filename.pdf <small class="text-muted small">(50KB)</small></div>
-                                <ul class="list-inline mt-2">
-                                    <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-sm btn-light-success btn-floating" title="View">
-                                            <i class="mdi mdi-link"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-sm btn-light-success btn-floating"
-                                           title="Download">
-                                            <i class="mdi mdi-download"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item messages-divider sticky-top" data-label="Yesterday"></div>
-                <div class="message-item out">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Matteo Reedy</h5>
-                            <div class="time">07:45 AM <i class="mdi mdi-check-all text-info ml-1"></i></div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">Thank you so much. These files are very important to me. I guess
-                            you didn't make any changes
-                            to these files. So I need the original versions of these files. Thank you very much
-                            again.
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">07:15 AM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">I'm about to send the other file now.</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="<?=base_url();?>dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Matteo Reedy</h5>
-                            <div class="time">07:45 AM <i class="mdi mdi-check-all text-info ml-1"></i></div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div>
-                            <div class="message-content-images">
-                                <a href="<?=base_url();?>dist/media/img/image1.jpg" data-fancybox="images">
-                                    <img src="<?=base_url();?>dist/media/img/image1.jpg" alt="image">
-                                </a>
-                                <a href="<?=base_url();?>dist/media/img/image2.jpg" data-fancybox="images">
-                                    <img src="<?=base_url();?>dist/media/img/image2.jpg" alt="image">
-                                </a>
-                                <a href="<?=base_url();?>dist/media/img/image3.jpg" data-fancybox="images">
-                                    <img src="<?=base_url();?>dist/media/img/image3.jpg" alt="image">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">08:00 AM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">I thank you. We are glad to help you. 😃</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="dist/media/img/avatar9.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Matteo Reedy</h5>
-                            <div class="time">09:23 AM <i class="mdi mdi-check-all text-info ml-1"></i></div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A,
-                            exercitationem inventore
-                            quaerat quos repellendus sunt? Assumenda dolor earum optio quis?
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item out">
-                    <div class="message-content">
-                        <div class="message-text">😃 😃 ❤ ❤</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">08:00 AM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="video-block">
-                            <a data-fancybox
-                               href="https://www.youtube.com/watch?v=c5nhWy7Zoxg&amp;list=PLmUBwxvdqHq-2La24tH5J55DwBdUwZnoI&amp;ab_channel=FrameStockFootages">
-                                <i class="mdi mdi-play-circle-outline"></i>
-                            </a>
-                        </div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item messages-divider" data-label="1 message unread"></div>
-                <div class="message-item in">
-                    <div class="message-avatar">
-                        <figure class="avatar avatar-sm">
-                            <img src="dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
-                        </figure>
-                        <div>
-                            <h5>Maribel Mallon</h5>
-                            <div class="time">11:05 AM</div>
-                        </div>
-                    </div>
-                    <div class="message-content">
-                        <div class="message-text">I sent you all the files. Good luck with 😃</div>
-                        <div class="dropdown">
-                            <a href="#" data-toggle="dropdown">
-                                <i class="mdi mdi-dots-horizontal"></i>
-                            </a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Reply</a>
-                                <a href="#" class="dropdown-item">Forward</a>
-                                <a href="#" class="dropdown-item">Copy</a>
-                                <a href="#" class="dropdown-item">Starred</a>
-                                <a href="#" class="dropdown-item example-delete-message">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <?php } ?>
+
+
+                <?php }?>
+
                 <div class="message-item in in-typing">
                     <div class="message-content">
                         <div class="message-text">
@@ -1005,7 +544,8 @@
             </div>
         </div>
         <div class="chat-footer" data-intro-js="6">
-            <form class="d-flex">
+            <form class="d-flex" id="FormMessages">
+               <!--
                 <div class="dropdown">
                     <button class="btn btn-light-info btn-floating mr-3" data-toggle="dropdown" title="Emoji"
                             type="button">
@@ -1065,9 +605,13 @@
                         <a href="#" class="dropdown-item">Video</a>
                     </div>
                 </div>
-                <input type="text" class="form-control form-control-main" placeholder="Write a message.">
+                --->
+                <?php $name = $this->M_user->get_name($row0['user_id']);?>
+                <input type="text" class="form-control form-control-main" name="message" id="message" placeholder="Write a message to <?=$name;?>.">
+                <input type="hidden" class="form-control form-control-main" name="from" id="from" value="<?=$this->session->userdata('user_id');?>" placeholder="Write a message.">
+                <input type="hidden" class="form-control form-control-main" name="to" id="to" value="<?=$row0['user_id'];?>" placeholder="Write a message.">
                 <div>
-                    <button class="btn btn-primary ml-2 btn-floating" type="submit">
+                    <button class="btn btn-primary ml-2 btn-floating" type="submit" id="batani">
                         <i class="mdi mdi-send"></i>
                     </button>
                 </div>
@@ -1075,6 +619,9 @@
         </div>
     </div>
     <!-- ./ chat -->
+    <?php }?>
+
+
 
 </div>
 <!-- ./ layout -->
@@ -1405,51 +952,6 @@
 </div>
 <!-- ./ User profile -->
 
-<!-- Settings --
-<div class="right-sidebar" id="settings">
-    <div class="right-sidebar-header">
-        <span class="right-sidebar-title">Settings</span>
-        <a href="#" class="right-sidebar-close">
-            <i class="mdi mdi-window-close"></i>
-        </a>
-    </div>
-    <div class="right-sidebar-content">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item py-3 px-0">
-                <div class="form-item custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" checked id="customSwitch14">
-                    <label class="custom-control-label" for="customSwitch14">Allow connected contacts</label>
-                </div>
-            </li>
-            <li class="list-group-item py-3 px-0">
-                <div class="form-item custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" checked id="customSwitch15">
-                    <label class="custom-control-label" for="customSwitch15">Confirm message requests</label>
-                </div>
-            </li>
-            <li class="list-group-item py-3 px-0">
-                <div class="form-item custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" checked id="customSwitch16">
-                    <label class="custom-control-label" for="customSwitch16">Profile privacy</label>
-                </div>
-            </li>
-            <li class="list-group-item py-3 px-0">
-                <div class="form-item custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch17">
-                    <label class="custom-control-label" for="customSwitch17">Developer mode options</label>
-                </div>
-            </li>
-            <li class="list-group-item py-3 px-0">
-                <div class="form-item custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" checked id="customSwitch18">
-                    <label class="custom-control-label" for="customSwitch18">Two-step security
-                        verification</label>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-./ Settings -->
 
 <!-- disconnected modal --
 <div class="modal fade" id="disconnected" tabindex="-1" role="dialog" aria-hidden="true">
@@ -1795,116 +1297,9 @@
 </div>
  new group modal -->
 
-<!-- setting modal --
-<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="mdi mdi-cog mr-2"></i> Settings
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="mdi mdi-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#account" role="tab" aria-controls="account"
-                           aria-selected="true">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#notification" role="tab"
-                           aria-controls="notification" aria-selected="false">Notification</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-                           aria-selected="false">Security</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane show active" id="account" role="tabpanel">
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch1">
-                            <label class="custom-control-label" for="customSwitch1">Allow connected contacts</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch2">
-                            <label class="custom-control-label" for="customSwitch2">Confirm message requests</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch3">
-                            <label class="custom-control-label" for="customSwitch3">Profile privacy</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch4">
-                            <label class="custom-control-label" for="customSwitch4">Developer mode options</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch5">
-                            <label class="custom-control-label" for="customSwitch5">Two-step security
-                                verification</label>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="notification" role="tabpanel">
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch6">
-                            <label class="custom-control-label" for="customSwitch6">Allow mobile notifications</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch7">
-                            <label class="custom-control-label" for="customSwitch7">Notifications from your
-                                friends</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch8">
-                            <label class="custom-control-label" for="customSwitch8">Send notifications by email</label>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="contact" role="tabpanel">
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch9">
-                            <label class="custom-control-label" for="customSwitch9">Suggest changing passwords every
-                                month.</label>
-                        </div>
-                        <div class="form-item custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" checked id="customSwitch10">
-                            <label class="custom-control-label" for="customSwitch10">Let me know about suspicious
-                                entries to your account</label>
-                        </div>
-                        <div class="form-item">
-                            <p>
-                                <a class="btn btn-light" data-toggle="collapse" href="#collapseExample" role="button"
-                                   aria-expanded="false"
-                                   aria-controls="collapseExample">
-                                    <i class="mdi mdi-plus mr-2"></i> Security Questions
-                                </a>
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Question 1">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Answer 1">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Question 2">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Answer 2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
- setting modal -->
+
+
+
 
 
 <!--change profile picture-->
@@ -1949,6 +1344,7 @@
         </div>
     </div>
 </div>
+<?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
 <div class="modal fade" id="changeProfile" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
         <div class="modal-content">
@@ -1961,38 +1357,36 @@
                 </button>
             </div>
             <div class="modal-body">
-
                 <div class="tab-content">
                     <div class="tab-pane show active" id="personal" role="tabpanel">
-                        <form>
+                        <form id="PicChange">
 
                             <div class="form-group">
                                 <label class="col-form-label">Avatar</label>
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <figure class="avatar mr-3 item-rtl">
-                                            <img src="<?=base_url();?>dist/media/img/avatar4.jpg" class="rounded-circle"
-                                                 alt="image">
+                                            <img src="<?=base_url();?>uploads/users/<?=$row['photo'];?>" class="rounded-circle"
+                                                 alt="image" id="blah">
                                         </figure>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="picture">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <input type="file" class="form-control" name="photo" id="photo">
                                     </div>
                                 </div>
                             </div>
-
 
                         </form>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="submitoo">Change</button>
+                <button type="button" class="btn btn-primary" id="PicChange2">Change</button>
             </div>
         </div>
     </div>
 </div>
+<?php }?>
 <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
         <?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
@@ -2204,25 +1598,18 @@
 
 <!-- Bundle scripts -->
 <script src="<?=base_url();?>dist/vendor/bundle.js"></script>
-
 <!-- Feather icons -->
 <script src="<?=base_url();?>dist/icons/feather/feather.min.js"></script>
-
 <!-- Slick -->
 <script src="<?=base_url();?>dist/vendor/slick/slick.min.js"></script>
-
 <!-- Fancybox -->
 <script src="<?=base_url();?>dist/vendor/fancybox/jquery.fancybox.min.js"></script>
-
 <!-- Intro js -->
 <script src="<?=base_url();?>dist/vendor/introjs/intro.js"></script>
-
 <!-- Jquery Stopwatch -->
 <script src="<?=base_url();?>dist/vendor/jquery.stopwatch.js"></script>
-
 <!-- Sweetalert2 -->
 <script src="<?=base_url();?>dist/vendor/sweetalert2.js"></script>
-
 <!-- App scripts -->
 <script src="<?=base_url();?>dist/js/app.min.js"></script>
 
@@ -2323,6 +1710,64 @@
                 }
             });
         });
+
+        function readURL(input){
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            $('#blah').attr('src', e.target.result);
+          }
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+          }
+        }
+        $("#photo").change(function(){readURL(this);});
+
+
+
+
+            $("#FormMessages").submit(function(event) {
+                event.preventDefault();
+                var formData = $("#FormMessages").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "<?=base_url();?>User/send_message",
+                    data: formData,
+                    success: function() {
+                        // handle success
+                        document.getElementById("message").value = "";
+                    }
+                });
+            });
+
+            $("#batani").on('click',function(event) {
+                event.preventDefault();
+                var formData = $("#FormMessages").serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "<?=base_url();?>User/send_message",
+                    data: formData,
+                    success: function() {
+                        // handle success
+                        document.getElementById("message").value = "";
+                    }
+                });
+            });
+
+            setInterval(function () {
+                $.ajax({
+                    method: "POST",
+                    url: "<?=base_url();?>User/get_charts_realtime",
+                    data: {
+                        to:$('#to').val(),
+                        from:$('#from').val()
+                    },
+                    dataType:'text',
+                    success: function(data) {
+                        $('#msgBody').html(data);
+                    }
+                });
+
+            },700)
 
     });
 </script>

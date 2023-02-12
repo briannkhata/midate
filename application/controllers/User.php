@@ -14,7 +14,8 @@ class User extends CI_Controller {
 
 	function chat(){
         $this->check_session();
-		$data['page_title']  = 'Users';
+        $this->M_user->get_setonline_status_to_on($this->session->userdata('user_id'));
+        $data['page_title']  = 'Members';
 		$this->load->view('user/chat',$data);
 	}
 
@@ -48,16 +49,7 @@ class User extends CI_Controller {
         $data['user_id']  = $param;
         $this->load->view('user/messages',$data);
     }
-	
-	function profile_picture($param=""){
-		$data['title'] = $this->input->post('title');
-		$data['priority'] = $this->input->post('priority');
-		$data['photo'] = $_FILES['photo']['name'];
-		$data['user_id'] = $this->input->post('user_id');
-		move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
-		$this->db->insert('tblphotos',$data);
-		redirect("user/profile/".$param);
-	}
+
     function add_photo(){
         $data['user_id'] = $this->session->userdata('user_id');
         $data['photo'] = random_string().'_'.$_FILES['photo']['name'];
@@ -67,6 +59,13 @@ class User extends CI_Controller {
         redirect("user/upload_photos");
     }
 
+    function change_profile(){
+        $data['photo'] = random_string().'_'.$_FILES['photo']['name'];
+        move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
+        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->update('tblusers',$data);
+        return;
+    }
     function close_account2(){
         $data['reason_for_closing'] = $this->input->post('reason_for_closing');
         $data['deleted'] = 1;
@@ -110,13 +109,40 @@ class User extends CI_Controller {
 
 
 	function send_message(){
-        $data['from'] = $this->session->userdata('user_id');
+        $data['from'] = $this->input->post('from');
         $data['to'] = $this->input->post('to');
         $data['message'] = $this->input->post('message');
         $data['sent'] = date('Y-m-d h:s:m');
         $data['read'] = 0;
         $this->db->insert('tblchats',$data);
         return;
+    }
+
+    function get_charts_realtime(){
+        $from = $this->input->post('from');
+        $to = $this->input->post('to');
+        $output = "";
+        $chats = $this->M_user->get_charts_realtime($to,$from);
+        foreach ($chats as $chat)
+        {
+                $output .='<div class="message-item '.($chat["from"] == $from ? 'out' : 'in').'">
+                            <div class="message-avatar">
+                               <figure class="avatar avatar-sm">
+                                    <img src='.base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to).' class="rounded-circle" alt="image">
+                                </figure>
+                                <div>
+                                  <h5>'.($chat["from"] == ($chat["from"] == $from ? $this->M_user->get_name($from) : $this->M_user->get_name($to))).'</h5>
+                                  <div class="time">'.date('d, M Y h:m:s',strtotime($chat['sent'])).'</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-item '.($chat["from"] == $from ? 'out' : 'in').'">
+                            <div class="message-content">
+                                <div class="message-text">'.$chat['message'].'</div>
+                            </div>
+                        </div>';
+        }
+                echo $output;
     }
 
 
