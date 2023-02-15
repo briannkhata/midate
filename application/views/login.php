@@ -14,6 +14,7 @@
 
     <!-- Material design icons -->
     <link href="<?=base_url();?>dist/icons/materialicons/css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.0/dist/sweetalert2.min.css">
 
     <!-- Bundle Styles -->
     <link rel="stylesheet" href="<?=base_url();?>dist/vendor/bundle.css">
@@ -24,7 +25,6 @@
 <body class="auth" style="background: url(<?=base_url();?>dist/media/img/auth.jpg)">
 
 <div class="form-wrapper">
-
     <!-- logo -->
     <div class="logo my-5">
         <img src="<?=base_url();?>dist/media/img/logo-full-2x.png" alt="logo">
@@ -48,11 +48,11 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required>
         </div>
         <div class="form-group d-flex justify-content-between">
-            <div class="custom-control custom-checkbox">
+            <!--<div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember me</label>
             </div>
-            <a href="reset-password.html">Reset password</a>
+            <a href="reset-password.html">Reset password</a>-->
         </div>
         <button class="btn btn-primary" type="submit" name="login">Sign in</button>
        <!--
@@ -86,8 +86,35 @@
                 </li>
             </ul>
         </div>-->
+
+
         <div class="my-5">
             <p>Don't have an account? <a href="<?=base_url();?>Home/register">Sign up now!</a></p>
+        </div>
+
+        <div class="my-5">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="<?=base_url();?>Home/about">
+                        About MiDate
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="<?=base_url();?>Home/privacy">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="<?=base_url();?>Home/how_it_works">
+                        How it Works
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="<?=base_url();?>Home/models">
+                        Models
+                    </a>
+                </li>
+            </ul>
         </div>
 
     </form>
@@ -100,7 +127,8 @@
 
 <!-- Landing page scripts -->
 <script src="<?=base_url();?>dist/js/landing-page.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.0.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- Theme customizer scripts -->
 <script>let LANDING_PAGE = true</script>
 <script src="<?=base_url();?>dist/js/theme-customizer.min.js"></script>

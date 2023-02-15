@@ -39,7 +39,7 @@
 <!-- preloader -->
 <div class="preloader">
     <img src="<?=base_url();?>dist/media/img/logo-2x.png" alt="logo">
-    <p class="lead font-weight-bold text-muted my-5">Loading ...</p>
+    <p class="lead font-weight-bold text-muted my-5">Loading miDate ...</p>
     <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
     </div>
@@ -124,13 +124,10 @@
 
 
                         <a href="#" class="dropdown-item" data-right-sidebar="user-profile">Profile</a>
-                        <div class="dropdown-divider"></div>
+                        <!--<a href="#" class="dropdown-item" data-toggle="modal" data-target="#settingsModal">Settings</a>
+                        <a href="#" class="dropdown-item d-none d-md-block example-app-tour-start">Start Tour</a>-->
 
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#closeAccount">Close Account</a>
                         <div class="dropdown-divider"></div>
-
-                        <a href="#" class="dropdown-item" data-toggle="modal" data-target="#activateAccount">Activate Account</a>
-                                                <div class="dropdown-divider"></div>
                         <a href="<?=base_url();?>Login/logout" class="dropdown-item text-danger">Logout</a>
                     </div>
                 </li>
@@ -209,14 +206,12 @@
         </div>
         <div class="left-sidebar-content">
             <ul class="list-group list-group-flush">
-                <?php foreach ($this->M_user->get_mychats() as $rowo){
-                    $profile = !file_exists(base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"])) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"]);
-                    ?>
+                <?php foreach ($this->M_user->get_mychats() as $rowo){?>
 
                 <li class="list-group-item active">
                     <div>
                         <figure class="avatar mr-3">
-                            <img src="<?=$profile;?>" class="rounded-circle" alt="image">
+                            <img src="<?=base_url();?>dist/media/img/avatar6.jpg" class="rounded-circle" alt="image">
                         </figure>
                     </div>
                     <div class="users-list-body">
@@ -254,13 +249,11 @@
         </div>
         <div class="left-sidebar-content">
             <ul class="list-group list-group-flush">
-                <?php foreach ($this->M_user->get_nearby_members() as $row){
-                    $profile = !file_exists(base_url()."uploads/users/".$row["photo"]) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$row["photo"];
-                    ?>
+                <?php foreach ($this->M_user->get_nearby_members() as $row){?>
                 <li class="list-group-item">
                     <div>
                         <figure class="avatar mr-3" style="height: 4.7rem;width: 4.7rem;">
-                            <img src="<?=$profile;?>" class="rounded-circle" alt="image">
+                            <img src="<?=base_url();?>uploads/users/<?=$row['photo'];?>" class="rounded-circle" alt="image">
                         </figure>
                     </div>
                     <div class="users-list-body">
@@ -296,17 +289,90 @@
         </div>
         <div class="left-sidebar-content">
             <ul class="list-group list-group-flush users-list">
-                <?php foreach ($this->M_user->get_my_subscriptions(3) as $pay){?>
-                    <li class="list-group-item">
-                        <div class="users-list-body">
-                            <div>
-                                <h5>Jennica Kindred</h5>
-                                <p>I know how important this file is to you. You can trust me ;)</p>
-                            </div>
-
+                <li class="list-group-item">
+                    <div class="users-list-body">
+                        <div>
+                            <h5>Jennica Kindred</h5>
+                            <p>I know how important this file is to you. You can trust me ;)</p>
                         </div>
-                    </li>
-                <?php }?>
+                        <div class="users-list-action">
+                            <div class="action-toggle">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" href="#">
+                                        <i class="mdi mdi-dots-horizontal"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item">Open</a>
+                                        <a href="#" class="dropdown-item">Remove favorites</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="users-list-body">
+                        <div>
+                            <h5>Marvin Rohan</h5>
+                            <p>Lorem ipsum dolor sitsdc sdcsdc sdcsdcs</p>
+                        </div>
+                        <div class="users-list-action">
+                            <div class="action-toggle">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" href="#">
+                                        <i class="mdi mdi-dots-horizontal"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item">Open</a>
+                                        <a href="#" class="dropdown-item">Remove favorites</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="users-list-body">
+                        <div>
+                            <h5>Frans Hanscombe</h5>
+                            <p>Lorem ipsum dolor sitsdc sdcsdc sdcsdcs</p>
+                        </div>
+                        <div class="users-list-action">
+                            <div class="action-toggle">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" href="#">
+                                        <i class="mdi mdi-dots-horizontal"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item">Open</a>
+                                        <a href="#" class="dropdown-item">Remove favorites</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="users-list-body">
+                        <div>
+                            <h5>Karl Hubane</h5>
+                            <p>Lorem ipsum dolor sitsdc sdcsdc sdcsdcs</p>
+                        </div>
+                        <div class="users-list-action">
+                            <div class="action-toggle">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" href="#">
+                                        <i class="mdi mdi-dots-horizontal"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="#" class="dropdown-item">Open</a>
+                                        <a href="#" class="dropdown-item">Remove favorites</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -386,9 +452,7 @@
     </div>
     <!-- ./ Archived left sidebar -->
 
-    <?php foreach($this->M_user->get_user_by_id(3) as $row0){
-        $profile2 = !file_exists(base_url()."uploads/users/".$row0["photo"]) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$row0["photo"];
-        ?>
+    <?php foreach($this->M_user->get_user_by_id(3) as $row0){?>
     <!-- chat -->
     <div class="chat"> <!-- no-message -->
         <div class="chat-preloader d-none">
@@ -399,7 +463,7 @@
         <div class="no-message-container">
             <div class="row mb-5">
                 <div class="col-md-4 offset-4">
-                    <img src="<?=$profile2;?>" class="img-fluid" alt="image">
+                    <img src="<?=base_url();?>uploads/users/<?=$row0['photo'];?>" class="img-fluid" alt="image">
                 </div>
             </div>
             <p class="lead">Choose a chat or start a <a href="#" data-left-sidebar="friends">new chat</a>.</p>
@@ -412,7 +476,7 @@
                 <div>
                     <h5><a href="#" data-right-sidebar="user-profile" title="Click to view Profile"><?=$row0['name'];?></a></h5>
 
-                    <?php $status = $this->M_user->get_online_status($row0['user_id']);
+                    <?php $status = $this->M_user->get_online_status(3);
                     if($status == 1){?>
                     <small class="text-success">Online</small>
                     <?php } else{ ?>
@@ -425,15 +489,14 @@
             <div class="messages" id="msgBody">
 
                 <?php
+                //!file_exists(base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to))) ?
                 $from = $this->session->userdata('user_id');
                 $to = $row0['user_id'];
                 foreach($this->M_user->get_user_chats($to,$from) as $chat) {
-                    $profile3 = !file_exists(base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to)) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to);
-
                     echo '<div class="message-item '.($chat["from"] == $from ? 'out' : 'in').'">
                             <div class="message-avatar">
                                <figure class="avatar avatar-sm">
-                                    <img src='.$profile3.' class="rounded-circle" alt="image">
+                                    <img src='.base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to).' class="rounded-circle" alt="image">
                                 </figure>
                                 <div>
                                   <h5>'.$this->M_user->get_name($chat["from"] == $from ? $from : $to).'</h5>
@@ -1112,83 +1175,9 @@
 </div>
  new group modal -->
 
-<div class="modal fade" id="closeAccount" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="mdi mdi-clipboard-edit-outline mr-2"></i> Close An Account
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="mdi mdi-close"></i>
-                </button>
-            </div>
-            <form action="<?=base_url();?>User/close_account" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="city" class="col-form-label">Reason  for closure</label>
-                        <div class="input-group">
-                            <textarea class="form-control" id="reason_for_closing"  name="reason_for_closing" required></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Close Account</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="activateAccount" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="mdi mdi-clipboard-edit-outline mr-2"></i> Activate Account
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="mdi mdi-close"></i>
-                </button>
-            </div>
-            <form action="<?=base_url();?>User/activate_account" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="city" class="col-form-label">Plan</label>
-                        <div class="input-group">
-                            <select class="form-control">
-                                <option selected disabled>Option</option>
-                                <option>Day</option>
-                                <option>Week</option>
-                                <option>Month</option>
-                                <option>Year</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="city" class="col-form-label">Payment Mode</label>
-                        <div class="input-group">
-                            <div class="input-group">
-                                <select class="form-control">
-                                    <option selected disabled>Option</option>
-                                    <option>Mpamba</option>
-                                    <option>Airtel Money</option>
-                                    <option>Mo626</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Activate Account</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal fade" id="addPhoto" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1210,7 +1199,7 @@
                                     </figure>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="form-control" name="photo2" id="photo2" required></div>
+                                    <input type="file" class="form-control" name="photo2" id="photo2"></div>
                             </div>
                         </div>
                     </div>
@@ -1221,8 +1210,10 @@
             </div>
         </div>
     </div>
+
+
 <!--change profile picture-->
-<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1233,35 +1224,35 @@
                     <i class="mdi mdi-close"></i>
                 </button>
             </div>
-            <form action="<?=base_url();?>User/change_password" method="post">
-
             <div class="modal-body">
+
+                        <form id="password-change">
+
                             <div class="form-group">
                                 <label for="city" class="col-form-label">Enter New Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password"  name="password" required>
+                                    <input type="password" class="form-control" id="password"  name="password">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="city" class="col-form-label">Confirm Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="cpassword" required>
+                                    <input type="password" class="form-control" id="cpassword">
                                 </div>
                             </div>
 
+                        </form>
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Change Password</button>
+                <button type="button" class="btn btn-primary" id="changePass">Change Password</button>
             </div>
-            </form>
         </div>
     </div>
 </div>
-
 <?php foreach($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
-<div class="modal fade" id="changeProfile" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="changeProfile" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1284,7 +1275,7 @@
                                         </figure>
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="form-control" name="photo" id="photo" required>
+                                        <input type="file" class="form-control" name="photo" id="photo">
                                     </div>
                           </div>
                 </div>
@@ -1298,11 +1289,10 @@
     </div>
 </div>
 <?php }?>
-<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
         <?php foreach ($this->M_user->get_user_by_id($this->session->userdata('user_id')) as $row){?>
-        <form action="<?=base_url();?>User/update_profile" method="post">
-        <div class="modal-content">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="mdi mdi-clipboard-edit-outline mr-2"></i> Update Profile
@@ -1326,13 +1316,13 @@
                                aria-controls="social-links" aria-selected="false">About</a>
                         </li>
                     </ul>
-
                     <div class="tab-content">
                         <div class="tab-pane show active" id="personal" role="tabpanel">
+                            <form>
                                 <div class="form-group">
                                     <label for="fullname" class="col-form-label">Fullname</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="name" value="<?=$row['name'];?>" id="name" required>
+                                        <input type="text" class="form-control" name="name" value="<?=$row['name'];?>" id="name">
                                         <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="mdi mdi-account-outline"></i>
@@ -1340,11 +1330,25 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--<div class="form-group">
+                                <label class="col-form-label">Avatar</label>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <figure class="avatar mr-3 item-rtl">
+                                            <img src="<?=base_url();?>dist/media/img/avatar4.jpg" class="rounded-circle"
+                                                 alt="image">
+                                        </figure>
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>-->
                                 <div class="form-group">
                                     <label for="phone" class="col-form-label">Phone</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="phone"  value="<?=$row['phone'];?>" id="phone" placeholder="" required>
+                                        <input type="text" class="form-control" name="phone"  value="<?=$row['phone'];?>" id="phone" placeholder="" readonly>
                                         <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="mdi mdi-phone"></i>
@@ -1355,7 +1359,7 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Gender</label>
                                     <div class="input-group">
-                                        <select name="gender" id="gender" class="form-control" required>
+                                        <select name="gender" id="gender" class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['gender'] =="Male") echo 'selected';?>  value="Male">Male</option>
                                             <option <?php if($row['gender'] =="Female") echo 'selected';?>  value="Female">Female</option>
@@ -1366,13 +1370,13 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Date of Birth</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="dob"  name="dob" placeholder="" value="<?=$row['dob'];?>" required>
+                                        <input type="date" class="form-control" id="dob"  name="dob" placeholder="" value="<?=$row['dob'];?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Status</label>
                                     <div class="input-group">
-                                        <select name="m_status" id="m_status" class="form-control" required>
+                                        <select name="m_status" id="m_status" class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['m_status'] =="Single") echo 'selected';?>  value="Single">Single</option>
                                             <option <?php if($row['m_status'] =="Widowed") echo 'selected';?> value="Widowed">Widowed</option>
@@ -1385,7 +1389,7 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Dating Type</label>
                                     <div class="input-group">
-                                        <select name="dating_type" id="dating_type" class="form-control" required>
+                                        <select name="dating_type" id="dating_type" class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['dating_type'] =="Serious") echo 'selected';?> value="Serious">Serious</option>
                                             <option <?php if($row['dating_type'] =="Casual") echo 'selected';?> value="Casual">Casual</option>
@@ -1400,26 +1404,26 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Country</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="country" value="<?=$row['country'];?>" id="country" placeholder="" required>
+                                        <input type="text" class="form-control" name="country" value="<?=$row['country'];?>" id="country" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">District</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" value="<?=$row['district'];?>" id="district" name="district" placeholder="" required>
+                                        <input type="text" class="form-control" value="<?=$row['district'];?>" id="district" name="district" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Location</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="location" value="<?=$row['location'];?>" id="location" placeholder="" required>
+                                        <input type="text" class="form-control" name="location" value="<?=$row['location'];?>" id="location" placeholder="">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Looking for</label>
                                     <div class="input-group">
-                                        <select name="looking_for" id="looking_for" class="form-control" required>
+                                        <select name="looking_for" id="looking_for" class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['looking_for'] =="Men") echo 'selected';?> value="Men">Men</option>
                                             <option <?php if($row['looking_for'] =="Women") echo 'selected';?> value="Women">Women</option>
@@ -1430,7 +1434,7 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Age From</label>
                                     <div class="input-group">
-                                        <select name="age_from" id="age_from"  class="form-control" required>
+                                        <select name="age_from" id="age_from"  class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['age_from'] =="18") echo 'selected';?> value="18">18</option>
                                             <option <?php if($row['age_from'] =="20") echo 'selected';?> value="20">20</option>
@@ -1443,7 +1447,7 @@
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Age To</label>
                                     <div class="input-group">
-                                        <select name="age_to" id="age_to" class="form-control" required>
+                                        <select name="age_to" id="age_to" class="form-control">
                                             <option selected disabled>Option</option>
                                             <option <?php if($row['age_to'] =="24") echo 'selected';?> value="24">24</option>
                                             <option <?php if($row['age_to'] =="30") echo 'selected';?> value="30">30</option>
@@ -1453,40 +1457,42 @@
                                     </div>
                                 </div>
 
+
+                            </form>
                         </div>
                         <div class="tab-pane" id="social-links" role="tabpanel">
+                            <form>
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Profession</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="profession" value="<?=$row['profession'];?>" id="profession" placeholder="" required>
+                                        <input type="text" class="form-control" name="profession" value="<?=$row['profession'];?>" id="profession" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="city" class="col-form-label">Church</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="church" value="<?=$row['church'];?>" id="church" placeholder="" required>
+                                        <input type="text" class="form-control" name="church" value="<?=$row['church'];?>" id="church" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="about-text" class="col-form-label">Write a few words that describe
                                         you</label>
-                                    <textarea class="form-control" id="about" name="about" required><?=$row['about'];?></textarea>
+                                    <textarea class="form-control" id="about" name="about"><?=$row['about'];?></textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="about-text" class="col-form-label">List down your Hobbies
                                         you</label>
-                                    <textarea class="form-control" id="hobies" name="hobies" required><?=$row['hobies'];?></textarea>
+                                    <textarea class="form-control" id="hobies" name="hobies"><?=$row['hobies'];?></textarea>
                                 </div>
-
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" id="submito">Save</button>
                 </div>
             </div>
-</form>
         <?php }?>
     </div>
 </div>
@@ -1519,19 +1525,77 @@
 </html>
 <script>
     $(document).ready(function() {
+        $("#submito").click(function() {
+            var gender = $("#gender").val();
+            var m_status = $("#m_status").val();
+            var name = $("#name").val();
+            var age_from = $("#age_from").val();
+            var age_to = $("#age_to").val();
+            var dob = $("#dob").val();
+            var dating_type = $("#dating_type").val();
+            var profession = $("#profession").val();
+            var church = $("#church").val();
+            var district = $("#district").val();
+            var country = $("#country").val();
+            var location = $("#location").val();
+            var about = $("#about").val();
+            var phone = $("#phone").val();
+            var looking_for = $("#looking_for").val();
+            var hobies = $("#hobies").val();
+
+
+           /* if(message =='') {
+                alert("Please fill all fields.");
+                return false;
+            }*/
+
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url();?>User/update_my_profile",
+                data: {
+                    gender : $("#gender").val(),
+                    m_status : $("#m_status").val(),
+                    name : $("#name").val(),
+                    age_from : $("#age_from").val(),
+                    age_to : $("#age_to").val(),
+                    dob : $("#dob").val(),
+                    dating_type : $("#dating_type").val(),
+                    profession : $("#profession").val(),
+                    church : $("#church").val(),
+                    district : $("#district").val(),
+                    country : $("#country").val(),
+                    location : $("#location").val(),
+                    about : $("#about").val(),
+                    phone : $("#phone").val(),
+                    looking_for : $("#looking_for").val(),
+                    hobies : $("#hobies").val(),
+
+                },
+                cache: false,
+                success: function(data) {
+                    alert('Your profile updated successfully');
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    //console.error(xhr);
+                }
+            });
+        });
+
+
+
         function readURL(input){
             if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
             $('#blah').attr('src', e.target.result);
-            $('#blah2').attr('src', e.target.result);
-
-            }
+          }
             reader.readAsDataURL(input.files[0]); // convert to base64 string
           }
         }
         $("#photo").change(function(){readURL(this);});
-        $("#photo2").change(function(){readURL(this);});
+
+
 
 
         var form = document.getElementById("FormMessages");
@@ -1593,6 +1657,90 @@
 
             },700)
 
+        $("#PicChange2").on('click',function(event) {
+            event.preventDefault();
+            var formData = $("#PicChange").serialize();
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url();?>User/change_profile",
+                data: formData,
+                success: function() {
+                    // handle success
+                    location.reload();
+                }
+            });
+        });
+
+
+        /*$("#addPhoto3").submit(function(event) {
+            event.preventDefault();
+            var formData = $("#addPhoto3").serialize();
+            $.ajax({
+                type: "POST",
+                url: "<?=base_url();?>User/add_photo",
+                data: formData,
+                success: function() {
+                    // handle success
+
+                }
+            });
+        });*/
+
+
+        $("#addPhoto3").on('submit',(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?=base_url();?>User/add_photo",
+                type: "POST",
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                beforeSend : function()
+                {
+                    //$("#preview").fadeOut();
+                    //$("#err").fadeOut();
+                },
+                success: function(data)
+                {
+                  /* if(data=='invalid')
+                    {
+                        // invalid file format.
+                        $("#err").html("Invalid File !").fadeIn();
+                    }
+                    else
+                    {
+                        // view uploaded file.
+                        $("#preview").html(data).fadeIn();
+                        $("#form")[0].reset();
+                    }*/
+                    location.reload();
+                },
+                error: function(e)
+                {
+                    //$("#err").html(e).fadeIn();
+                }
+            });
+        }));
+
+
+        $("#PicChange").on("submit", function(e) {
+            e.preventDefault();
+            var formData = new FormData();
+            $.ajax({
+                url: "<?=base_url();?>User/change_profile",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
 
     });
 </script>

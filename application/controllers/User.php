@@ -16,7 +16,7 @@ class User extends CI_Controller {
         $this->check_session();
         $this->M_user->get_setonline_status_to_on($this->session->userdata('user_id'));
         $data['page_title']  = 'Members';
-		$this->load->view('user/chat',$data);
+		$this->load->view('User/chat',$data);
 	}
 
 	function register(){
@@ -36,37 +36,27 @@ class User extends CI_Controller {
         $data['password'] = MD5($this->input->post('password'));
         $this->db->where('user_id',$this->session->userdata('user_id'));
         $this->db->insert('tblusers',$data);
-        return;
+        $this->session->set_flashdata('message','Password changed Successfully');
+        redirect("User/chat");
     }
-
-    function close_account($param=''){
-        $data['page_title']  = 'Close Account';
-        $data['user_id']  = $param;
-        $this->load->view('user/close Account',$data);
-    }
-    function messages($param=''){
-        $data['page_title']  = 'Messages';
-        $data['user_id']  = $param;
-        $this->load->view('user/messages',$data);
-    }
-
     function add_photo(){
         $data['user_id'] = $this->session->userdata('user_id');
-        $data['photo'] = random_string().'_'.$_FILES['photo']['name'];
-        move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
+        $data['photo'] = random_string().'_'.$_FILES['photo2']['name'];
+        move_uploaded_file($_FILES['photo2']['tmp_name'],"uploads/users/".$data['photo']);
         $this->db->insert('tblphotos',$data);
         $this->session->set_flashdata('message','Photo Uploaded Successfully');
-        redirect("user/upload_photos");
+        redirect("User/chat");
     }
 
     function change_profile(){
         $data['photo'] = random_string().'_'.$_FILES['photo']['name'];
+        $user_id = $this->session->userdata('user_id');
         move_uploaded_file($_FILES['photo']['tmp_name'],"uploads/users/".$data['photo']);
-        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $this->db->where('user_id',$user_id);
         $this->db->update('tblusers',$data);
-        return;
+        redirect("User/chat");
     }
-    function close_account2(){
+    function close_account(){
         $data['reason_for_closing'] = $this->input->post('reason_for_closing');
         $data['deleted'] = 1;
         $data['date_closed'] = date('Y-m-d h:m:s');
@@ -78,15 +68,16 @@ class User extends CI_Controller {
 
     function update_password(){
         $data['password'] = MD5($this->input->post('password'));
-        $this->db->where('user_id',$this->session->userdata('user_id'));
+        $user_id = $this->session->userdata('user_id');
         $this->db->update('tblusers',$data);
         $this->session->set_flashdata('message','Password Changed Successfully');
-        redirect("user/profile");
+        redirect("User/chat");
     }
-    function update_my_profile(){
+    function update_profile(){
         $data['name'] = $this->input->post('name');
         $data['church'] = $this->input->post('church');
         $data['profession'] = $this->input->post('profession');
+        $data['phone'] = $this->input->post('phone');
         $data['dob'] = $this->input->post('dob');
         $data['location'] = $this->input->post('location');
         $data['gender'] = $this->input->post('gender');
@@ -102,9 +93,8 @@ class User extends CI_Controller {
         $data['hobies'] = $this->input->post('hobies');
         $this->db->where('user_id',$this->session->userdata('user_id'));
         $this->db->update('tblusers',$data);
-        //$this->session->set_flashdata('message','Profile Updated Successfully');
-        //redirect("user/update_profile");
-        return;
+        $this->session->set_flashdata('message','Profile Updated Successfully');
+        redirect("user/chat");
     }
 
 
@@ -125,13 +115,14 @@ class User extends CI_Controller {
         $chats = $this->M_user->get_charts_realtime($to,$from);
         foreach ($chats as $chat)
         {
-                $output .='<div class="message-item '.($chat["from"] == $from ? 'out' : 'in').'">
+            $profile4 = !file_exists(base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to)) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to);
+            $output .='<div class="message-item '.($chat["from"] == $from ? 'out' : 'in').'">
                             <div class="message-avatar">
                                <figure class="avatar avatar-sm">
-                                    <img src='.base_url()."uploads/users/".$this->M_user->get_photo($chat["from"] == $from ? $from : $to).' class="rounded-circle" alt="image">
+                                    <img src='.$profile4.' class="rounded-circle" alt="image">
                                 </figure>
                                 <div>
-                                  <h5>'.($chat["from"] == ($chat["from"] == $from ? $this->M_user->get_name($from) : $this->M_user->get_name($to))).'</h5>
+                                  <h5>'.$this->M_user->get_name($chat["from"] == $from ? $from : $to).'</h5>
                                   <div class="time">'.date('d, M Y h:m:s',strtotime($chat['sent'])).'</div>
                                 </div>
                             </div>

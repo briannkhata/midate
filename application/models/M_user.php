@@ -23,11 +23,25 @@ class M_user extends CI_Model {
         return $query->result_array();
     }
 
+    function get_my_subscriptions($user_id){
+        $this->db->where('user_id',$user_id);
+        $this->db->order_by('user_id','ASC');
+        $query = $this->db->get('tblactivations');
+        return $query->result_array();
+    }
+
     function get_mychats(){
         $this->db->where('to',$this->session->userdata('user_id'));
         $this->db->group_by('from');
         $this->db->order_by('sent','Desc');
         $query = $this->db->get('tblchats');
+        return $query->result_array();
+    }
+
+    function get_user_photos($user_id){
+        $this->db->where('user_id',$user_id);
+        $this->db->order_by('photo_id','Desc');
+        $query = $this->db->get('tblphotos');
         return $query->result_array();
     }
 
