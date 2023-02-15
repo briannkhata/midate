@@ -42,7 +42,7 @@
     <!-- form -->
     <form action="<?=base_url();?>Login/signin" method="post">
         <div class="form-group">
-            <input type="text" class="form-control" name="phone" placeholder="Phone" required autofocus>
+            <input type="text" class="form-control" name="phone" placeholder="Phone" required autofocus autocomplete="false">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -109,11 +109,7 @@
                         How it Works
                     </a>
                 </li>
-                <li class="list-inline-item">
-                    <a href="<?=base_url();?>Home/models">
-                        Models
-                    </a>
-                </li>
+
             </ul>
         </div>
 

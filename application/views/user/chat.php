@@ -58,7 +58,7 @@
                         <img src="<?=base_url();?>dist/media/img/logo.png" alt="logo">
                     </a>
                 </li>
-               <!-- <li class="navigation-action-button dropright" title="New" data-placement="right">
+               <!--<li class="navigation-action-button dropright" title="New" data-placement="right">
                     <a href="#" data-intro-js="1" data-toggle="dropdown">
                         <i class="mdi mdi-plus"></i>
                     </a>
@@ -121,8 +121,6 @@
                             Password</a>
                         <div class="dropdown-divider"></div>
 
-
-
                         <a href="#" class="dropdown-item" data-right-sidebar="user-profile">Profile</a>
                         <div class="dropdown-divider"></div>
 
@@ -130,7 +128,7 @@
                         <div class="dropdown-divider"></div>
 
                         <a href="#" class="dropdown-item" data-toggle="modal" data-target="#activateAccount">Activate Account</a>
-                                                <div class="dropdown-divider"></div>
+                         <div class="dropdown-divider"></div>
                         <a href="<?=base_url();?>Login/logout" class="dropdown-item text-danger">Logout</a>
                     </div>
                 </li>
@@ -213,22 +211,22 @@
                     $profile = !file_exists(base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"])) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"]);
                     ?>
 
-                <li class="list-group-item active">
-                    <div>
-                        <figure class="avatar mr-3">
-                            <img src="<?=$profile;?>" class="rounded-circle" alt="image">
-                        </figure>
-                    </div>
-                    <div class="users-list-body">
+                    <li class="list-group-item active">
                         <div>
-                            <h5><?=$this->M_user->get_name($rowo['from']);?></h5>
-                            <p><?=$rowo['message'];?></p>
+                            <figure class="avatar mr-3">
+                                <img src="<?=$profile;?>" class="rounded-circle" alt="image">
+                            </figure>
                         </div>
-                        <div class="users-list-action">
-                            <small class="text-muted"><?=date('Y M d h:m:s',strtotime($rowo['sent']));?></small>
+                        <div class="users-list-body">
+                            <div>
+                                <h5><?=$this->M_user->get_name($rowo['from']);?></h5>
+                                <p><?=$rowo['message'];?></p>
+                            </div>
+                            <div class="users-list-action">
+                                <small class="text-muted"><?=date('Y M d h:m:s',strtotime($rowo['sent']));?></small>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
                 <?php }?>
 
 
@@ -464,7 +462,7 @@
         <div class="chat-footer" data-intro-js="6">
             <form class="d-flex" id="FormMessages">
                 <?php $name = $this->M_user->get_name($to);?>
-                <input type="text" class="form-control form-control-main" name="message" id="message" placeholder="Say hie to <?=$name;?>.">
+                <input type="text" class="form-control form-control-main" name="message" id="message" placeholder="Send message to <?=$name;?>.">
                 <input type="hidden" name="from" id="from" value="<?=$from;?>">
                 <input type="hidden" name="to" id="to" value="<?=$to;?>">
                 <div>

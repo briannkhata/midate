@@ -1,39 +1,30 @@
-<!-- ======= mainmenu-area section ======= -->
-<section class="mainmenu-area stricky">
-    <div class="container">
-        <nav class="clearfix">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header clearfix">
-                <button type="button" class="navbar-toggle collapsed">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="fa fa-th fa-2x"></span>
-                </button>
-            </div>
-            <div class="nav_main_list custom-scroll-bar pull-left" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" id="hover_slip">
-                    <li><a href="<?=base_url();?>Home">Home</a></li>
-                    <li><a href="<?=base_url();?>Home/about">About Us</a></li>
-                    <li><a href="<?=base_url();?>Home/loans">Our Products</a></li>
-                    <li><a href="<?=base_url();?>Home/team">Our Team</a>
-                    <li><a href="<?=base_url();?>Home/applyLoan">Apply Loan</a>
-
-                    </li>
-                    <!--<li class="arrow_down"><a href="shop-page.html">Shop</a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li><a href="product-details.html">Product Details</a></li>
-                                <li><a href="cart-page.html">Cart Page</a></li>
-                                <li><a href="checkout-page.html">Checkout Page</a></li>
-                            </ul>
-                        </div>
-                    </li>-->
-                    <li><a class="contact" href="<?=base_url();?>Home/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="find-advisor pull-right">
-                <a href="advisor.html" class="advisor" data-toggle="modal" data-target="#Calculator">Loan
-                    Calculator</a>
-            </div>
-        </nav> <!-- End Nav -->
-    </div> <!-- End Container -->
-</section>
+<nav class="navbar fixed-top bg-white navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="<?=base_url();?>dist/media/img/logo-full-2x.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url();?>Home/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url();?>Home/how_it_works">How it Works</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url();?>Home/privacy">Privacy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=base_url();?>Home/register">Register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?=base_url();?>">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav><?php
