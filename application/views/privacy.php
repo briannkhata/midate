@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>How it Works</title>
+    <title><?=$page_title;?></title>
 
     <!-- Favicon -->
     <link rel="icon" href="<?=base_url();?>dist/media/img/favicon.png" type="image/png">
