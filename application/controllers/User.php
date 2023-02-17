@@ -2,21 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
-	function index(){
+	/*function index(){
 		$data['page_title']  = 'Login';
 		$this->load->view('admin/index',$data);			
-	}
+	}*/
 
     function check_session(){
         if ($this->session->userdata('user_login') != 1)//not logged in
             redirect(base_url(), 'refresh');
     }
 
-	function chat(){
+	function index(){
         $this->check_session();
         $this->M_user->get_setonline_status_to_on($this->session->userdata('user_id'));
         $data['page_title']  = 'Members';
-		$this->load->view('User/chat',$data);
+		$this->load->view('user/chat',$data);
 	}
 
 	function register(){
@@ -95,6 +95,154 @@ class User extends CI_Controller {
         $this->db->update('tblusers',$data);
         $this->session->set_flashdata('message','Profile Updated Successfully');
         redirect("user/chat");
+    }
+    function get_user_chats(){
+        $user_id = $this->input->get('user_id');
+        echo $user_id;
+    }
+
+    function get_user_by_id(){
+        $user_id = $this->input->post('user_id');
+        $output = "";
+        /*$user = $this->M_user->get_user_by_id($user_id);
+        foreach ($user as $chat)
+        {
+         $output .= '<div class="right-sidebar-header with-tab-menu">
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                   aria-controls="home" aria-selected="true">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile" aria-selected="false">Media</a>
+            </li>
+        </ul>
+        <a href="#" class="right-sidebar-close">
+            <i class="mdi mdi-window-close"></i>
+        </a>
+    </div>
+    <div class="right-sidebar-content">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                <div class="mt-4 mb-4">
+                    <h6>Name</h6>
+                    <p class="text-muted"><?=$pro['name'];?></p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Age</h6>
+    <p class="text-muted"><?=date('Y-m-d') - date('Y-m-d',strtotime($pro['dob']));?> Years Old
+    </p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Gender</h6>
+    <p class="text-muted"><?=$pro['gender'];?></p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Looking For</h6>
+    <p class="text-muted"><?=$pro['looking_for'];?></p>
+</div>
+
+<div class="mt-4 mb-4">
+    <h6>Age Range</h6>
+    <p class="text-muted"><?=$pro['age_from'];?> Years To <?=$pro['age_to'];?> Years</p>
+</div>
+
+<p class="text-muted"><?=$pro['about'];?></p>
+<div class="mt-4 mb-4">
+    <h6>Phone</h6>
+    <p class="text-muted"><?=$pro['phone'];?></p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Email</h6>
+    <p class="text-muted"><?=$pro['email'];?></p>
+</div>
+
+<div class="mt-4 mb-4">
+    <h6>Location</h6>
+    <p class="text-muted"><?=$pro['country'];?>, <?=$pro['district'];?>,<?=$pro['location'];?></p>
+</div>
+
+<div class="mt-4 mb-4">
+    <h6>Church</h6>
+    <p class="text-muted"><?=$pro['church'];?></p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Profession</h6>
+    <p class="text-muted"><?=$pro['profession'];?></p>
+</div>
+
+<div class="mt-4 mb-4">
+    <h6>Dating Type</h6>
+    <p class="text-muted"><?=$pro['dating_type'];?></p>
+</div>
+<div class="mt-4 mb-4">
+    <h6>Hobbies</h6>
+    <p class="text-muted"><?=$pro['hobies'];?></p>
+</div>
+
+</div>
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item py-3 px-0 d-flex justify-content-between">
+                <div>
+                    <div class="text-center mb-4">
+                        <figure class="avatar avatar-xl mb-4">
+                            <img src="<?=base_url();?>uploads/users/<?=$pro['photo'];?>" class="img-responsive" alt="image">
+                        </figure>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" data-toggle="dropdown">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item">Change Profile</a>
+                        <a href="#" class="dropdown-item">Delete</a>
+                    </div>
+                </div>
+            </li>
+            <?php foreach ($this->M_user->get_user_photos(3) as $ph){?>
+                <li class="list-group-item py-3 px-0 d-flex justify-content-between">
+                    <div>
+                        <figure class="avatar avatar-sm mr-2">
+                                    <span class="avatar-title bg-secondary rounded-circle">
+                                        <i class="mdi mdi-image"></i>
+                                    </span>
+                        </figure>
+                        avatar_image.png
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" data-toggle="dropdown">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item">Set Profile</a>
+                            <a href="#" class="dropdown-item">Delete</a>
+                        </div>
+                    </div>
+                </li>
+            <?php }?>
+            <li class="list-group-item py-3 px-0 d-flex justify-content-between" data-toggle="modal" data-target="#addPhoto">
+                <div>
+                    <figure class="avatar avatar-sm mr-2">
+                                    <span class="avatar-title bg-success rounded-circle" data-toggle="modal" data-target="#addPhoto">
+                                        <i class="mdi mdi-image-plus"></i>
+                                    </span>
+                    </figure>
+                    Add Photos i.e <small>You can add only 4 Photos Maximum</small>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>';
+}
+echo $output;*/
     }
 
 

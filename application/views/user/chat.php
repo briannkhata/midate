@@ -121,7 +121,7 @@
                             Password</a>
                         <div class="dropdown-divider"></div>
 
-                        <a href="#" class="dropdown-item" data-right-sidebar="user-profile">Profile</a>
+                        <a href="#" class="dropdown-item ukwaju" data-user-id="<?=$this->session->userdata('user_id');?>" data-right-sidebar="user-profile">Profile</a>
                         <div class="dropdown-divider"></div>
 
                         <a href="#" class="dropdown-item" data-toggle="modal" data-target="#closeAccount">Close Account</a>
@@ -210,8 +210,8 @@
                 <?php foreach ($this->M_user->get_mychats() as $rowo){
                     $profile = !file_exists(base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"])) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$this->M_user->get_photo($rowo["from"]);
                     ?>
-
-                    <li class="list-group-item active">
+					<div data-user-id="<?=$rowo['to'];?>"  class="inbox">
+                    <li class="list-group-item">
                         <div>
                             <figure class="avatar mr-3">
                                 <img src="<?=$profile;?>" class="rounded-circle" alt="image">
@@ -227,6 +227,7 @@
                             </div>
                         </div>
                     </li>
+					</div>
                 <?php }?>
 
 
@@ -255,21 +256,23 @@
                 <?php foreach ($this->M_user->get_nearby_members() as $row){
                     $profile = !file_exists(base_url()."uploads/users/".$row["photo"]) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$row["photo"];
                     ?>
-                <li class="list-group-item">
-                    <div>
-                        <figure class="avatar mr-3" style="height: 4.7rem;width: 4.7rem;">
-                            <img src="<?=$profile;?>" class="rounded-circle" alt="image">
-                        </figure>
-                    </div>
-                    <div class="users-list-body">
-                        <div>
-                            <h5><?=$row['name'];?> | <?=$row['gender'];?></h5>
-                            <small> Looking for <?=$row['looking_for'];?></small>
-                            <small><?=date('Y-m-d') - date('Y-m-d',strtotime($row['dob']));?> Years Old</small>
-                            <small><?=$row['district'];?>,<?=$row['location'];?>,</small>
-                        </div>
-                    </div>
-                </li>
+					<div data-user-id="<?=$row['user_id'];?>"  class="jinja">
+					<li class="list-group-item">
+						<div>
+							<figure class="avatar mr-3" style="height: 4.7rem;width: 4.7rem;">
+								<img src="<?=$profile;?>" class="rounded-circle" alt="image">
+							</figure>
+						</div>
+						<div class="users-list-body">
+							<div>
+								<h5><?=$row['name'];?> | <?=$row['gender'];?></h5>
+								<small> Looking for <?=$row['looking_for'];?></small>
+								<small><?=date('Y-m-d') - date('Y-m-d',strtotime($row['dob']));?> Years Old</small>
+								<small><?=$row['district'];?>,<?=$row['location'];?>,</small>
+							</div>
+						</div>
+					</li>
+					</div>
                 <?php }?>
 
             </ul>
@@ -383,6 +386,9 @@
         </div>
     </div>
     <!-- ./ Archived left sidebar -->
+	
+	<div id="batile" style="background:red; width:100px; height:300px; margin-top:20%;">
+	</div>
 
     <?php foreach($this->M_user->get_user_by_id(3) as $row0){
         $profile2 = !file_exists(base_url()."uploads/users/".$row0["photo"]) ? base_url().'uploads/users/noimage.png': base_url()."uploads/users/".$row0["photo"];
@@ -1591,6 +1597,64 @@
 
             },700)
 
+
+
+        const userButton = document.querySelector('.ukwaju');
+        //const jinja = document.querySelector('.jinja');
+        const userProfile = document.querySelector('#user-profile');
+
+        userButton.addEventListener('click', () => {
+            const userId = userButton.dataset.userId;
+
+
+            const request = new XMLHttpRequest();
+            request.open('GET', `get_user_profile.php?id=${userId}`);
+            request.onload = () => {
+                if (request.status === 200) {
+                    userProfile.innerHTML = request.responseText;
+                }
+            };
+            request.send();
+        });
+
+
+        //members tab
+        const members = document.querySelectorAll('.jinja');
+        for (var i = 0; i < members.length; i++) {
+                members[i].addEventListener('click', function() {
+                const selectedMember = this.getAttribute('data-user-id');
+                $.ajax({
+                    type: "GET",
+                    url: "<?=base_url();?>User/get_user_chats",
+                    data: {
+                        user_id : selectedMember,
+                        },
+                    success: function(data) {
+                       $('#batile').html(data);
+                    }
+                });
+
+            });
+        }
+
+        //members chats
+        const inbox = document.querySelectorAll('.jinja');
+        for (var i = 0; i < members.length; i++) {
+            inbox[i].addEventListener('click', function() {
+                const selectedChat = this.getAttribute('data-user-id');
+                $.ajax({
+                    type: "GET",
+                    url: "<?=base_url();?>User/get_user_chats",
+                    data: {
+                        user_id : selectedChat,
+                    },
+                    success: function(data) {
+                        $('#batile').html(data);
+                    }
+                });
+
+            });
+        }
 
     });
 </script>

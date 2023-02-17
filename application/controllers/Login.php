@@ -18,7 +18,7 @@ class Login extends CI_Controller {
 					 $this->session->set_userdata('user_id',$user_id);
 					 $this->session->set_userdata('role',$role);
                      $this->session->set_userdata('name',$name);
-                     redirect(base_url().'User/chat', 'refresh');
+                     redirect('User');
 					}
 					$this->session->set_flashdata('message','Invalid Username or Password');
                     redirect(base_url());
